@@ -19,6 +19,11 @@ class ProjectController extends Controller
         return redirect()->back();
     }
     
+   public function index()
+    {
+        return view('project.index', ['projects'=> Project::all()]);
+    }
+    
     
     
     

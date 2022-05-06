@@ -25,6 +25,8 @@ Route::group(['prefix' => 'tasks', 'middleware' => 'auth'], function() {
     Route::post('new', 'Admin\TaskController@create');
 });
 
+Route::get('/', 'Admin\ProjectController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
