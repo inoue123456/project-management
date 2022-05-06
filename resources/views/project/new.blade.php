@@ -17,25 +17,19 @@
                     <div class="form-group row">
                         <label class="col-md-2">プロジェクト名</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="projectname" value="{{ old('projectname') }}">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2">顧客名（社名）</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="projectname" value="{{ old('projectname') }}">
+                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">契約日</label>
                         <div class="col-md-10">
-                            <input type="date" class="form-control" name="contractday" value="{{ old('contractday') }}">
+                            <input type="date" class="form-control" name="contract_date" value="{{ old('contract_date') }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2">納期</label>
                         <div class="col-md-10">
-                            <input type="date" class="form-control" name="deadline" value="{{ old('deadline') }}">
+                            <input type="date" class="form-control" name="deadline_date" value="{{ old('deadline_date') }}">
                         </div>
                     </div>
                     

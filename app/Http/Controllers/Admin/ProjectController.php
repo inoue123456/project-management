@@ -4,21 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Project;
 
 class ProjectController extends Controller
 {
     public function add() {
-        return view('manager.project.create');
+        return view('project.new');
     }
-    public function create() {
-        return redirect('manager/project/create');
+    public function create(Request $request)
+    {
+        $project = new Project;
+        $project->fill($request->all());
+        $project->save();
+        return redirect()->back();
     }
-    public function edit() {
-        return view('manager.project.edit');
-    }
-    public function update() {
-        return redirect('manager/project/edit');
-    }
+    
     
     
     

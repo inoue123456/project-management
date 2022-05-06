@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <h2>プロジェクト登録</h2>
+                <h2>タスク登録</h2>
                 <form action="{{ action('Admin\ProjectController@create') }}" method="post" enctype="multipart/form-data">
 
                     @if (count($errors) > 0)
@@ -15,23 +15,12 @@
                         </ul>
                     @endif
                     <div class="form-group row">
-                        <label class="col-md-2">プロジェクト名</label>
+                        <label class="col-md-2">タスク名</label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="projectname" value="{{ old('projectname') }}">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-2">顧客名（社名）</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="projectname" value="{{ old('projectname') }}">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2">契約日</label>
-                        <div class="col-md-10">
-                            <input type="date" class="form-control" name="contractday" value="{{ old('contractday') }}">
-                        </div>
-                    </div>
+                    
                     <div class="form-group row">
                         <label class="col-md-2">納期</label>
                         <div class="col-md-10">

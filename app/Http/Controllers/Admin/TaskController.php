@@ -8,15 +8,10 @@ use Illuminate\Http\Request;
 class TaskController extends Controller
 {
     public function add() {
-        return view('manager.task.create');
+        return view('task.new');
     }
     public function create() {
-        return redirect('manager/task/create');
+        return redirect('task/new');
     }
-    public function edit() {
-        return view('manager.task.edit');
-    }
-    public function update() {
-        return redirect('manager/task/edit');
-    }
+    
 }
