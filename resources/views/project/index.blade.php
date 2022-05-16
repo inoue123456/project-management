@@ -2,16 +2,32 @@
 
 @section('content')
 <div class="container">
-<div class="my-3 p-3 bg-white rounded shadow-sm">
-    <h6 class="border-bottom border-gray pb-2 mb-0">プロジェクト一覧</h6>
-    @foreach($projects as $project)
-        <div class="media text-muted pt-3">
-          <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="" class="mr-2 rounded">
-          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-            {{ $project->name }}
-          </p>
-        </div>
-    @endforeach
+  <div class="row">
+    <div class="col-md-10 col-md-offset-2">
+        <h2>プロジェクト一覧</h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>プロジェクト名</th>
+              <th>契約日</th>
+              <th>納期</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($projects as $project)
+            <tr>
+              <td>{{ $project->name }}</th>
+              <td>{{ $project->contract_date }}</td>
+              <td>{{ $project->deadline_date }}</td>
+              <td><button type="button" class="btn btn-primary" onclick="location.href='projects/{{ $project->id }}/edit'">編集</button></td>
+              <td><button type="button" class="btn btn-primary" onclick="location.href='projects/{{ $project->id }}/delete'">削除</button></td>
+            </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
   </div>
 </div>
 @endsection 
