@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Project;
 use Carbon\Carbon;
 use Auth;
+use App\Clientcompany;
+use App\Client;
 
 class ProjectController extends Controller
 {
@@ -17,10 +19,28 @@ class ProjectController extends Controller
     {
         $this->validate($request, Project::$rules);
         
+        $client_company = new Clientcompany;
+        $client_company_form = $request->only(['company_name']);
+        $client_company->fill($client_company_form);
+        $client_company->save();
+        
+        /* 同じフォームから複数のテーブルに保存
+        ついでに他のテーブルからidも取得
+        参照 https://wayasblog.com/laravel-db-save/
+        //*/
+        $company_id = $client_company->id;
+        $client = new Client;
+        $client_form = $request->only(['client_name', 'e-mail', 'phone_number']);
+        $client->fill($client_form);
+        $client->client_company_id = $company_id;
+        $client->save();
+        
+        $client_id = $client->id;
         $project = new Project;
-        $form = $request->all();
+        $form = $request->only(['name','contract_date', 'deadline_date']);
         $project->fill($form);
         $project->user_id = Auth::id();
+        $project->client_id = $client_id;
         $project->save();
         return redirect()->back();
     }
@@ -33,7 +53,7 @@ class ProjectController extends Controller
     public function edit(Request $request)
     {
         $project = Project::find($request->id);
-      if (empty($project)) {
+        if (empty($project)) {
         abort(404);    
       }
         return view('project.edit', ['project'=> $project]);

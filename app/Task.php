@@ -15,6 +15,10 @@ class Task extends Model
         );
     
     public function project() {
-        return $this->hasMany('App\Project');
+        return $this->belongsTo('App\Project');
+    }
+    
+    public function personaltask() {
+        return $this->hasMany('App\PersonalTask');
     }
 }

@@ -150,6 +150,8 @@ return [
         'name' => 'プロジェクト名',
         'contract_date' => '契約日',
         'deadline_date' => '納期',
-        'task_name' => 'タスク名'],
+        'task_name' => 'タスク名',
+        'personaltask_name' => '担当者タスク',
+        'company_name' => '会社名'],
 
 ];

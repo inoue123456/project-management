@@ -32,7 +32,32 @@
                             <input type="date" class="form-control" name="deadline_date" value="{{ old('deadline_date') }}">
                         </div>
                     </div>
-                    
+                    <br>
+                    <big><p>顧客情報</p></big>
+                    <div class="form-group row">
+                        <label class="col-md-4">会社名</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="company_name" value="{{ old('company_name') }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4">依頼者名</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="client_name" value="{{ old('client_name') }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4">依頼者メールアドレス</label>
+                        <div class="col-md-10">
+                            <input type="email" class="form-control" name="e-mail" value="{{ old('e-mail') }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4">依頼者電話番号</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="phone_number" placeholder="ハイフンなしで入力してくれ"value="{{ old('phone_number') }}">
+                        </div>
+                    </div>
                     {{ csrf_field() }}
                     <input type="submit" class="btn btn-primary" value="登録">
                 </form>
