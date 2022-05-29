@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'department_name', 'role'
     ];
 
     /**
@@ -37,8 +37,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
+    public static $rules = array(
+        'name' => 'required', 
+        'email' => 'required', 
+        'password' => 'required', 
+        'department_name' => 'required', 
+        'role'=> 'required');
+    
     public function projects() {
         return $this->hasMany('App\Project');
+    }
+    
+    public function departments() {
+        return $this->belongsTo('App\Department');
     }
     
     public function isAdmin(){
