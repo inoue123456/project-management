@@ -25,6 +25,12 @@ class UserController extends Controller
         return view('user.index', ['users'=>User::all()]);
     }
     
+    public function showDetail($id)
+    {
+        $user = User::find($id);
+        return view('user.detail', ['user' => $user]);
+    }
+    
     public function edit(User $user) {
         return view('user.edit',compact('user'));
     }
@@ -32,7 +38,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->validate($request,User::$update_rules);
-        $user->fill($request->only(['name','email']))->update();
+        $user->fill($request->all())->update();
         session()->flash('updated_done','更新が完了しました');
         return redirect()->back();
     }
