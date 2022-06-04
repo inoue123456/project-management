@@ -152,6 +152,12 @@ return [
         'deadline_date' => '納期',
         'task_name' => 'タスク名',
         'personaltask_name' => '担当者タスク',
-        'company_name' => '会社名'],
+        'company_name' => '会社名',
+        'department_name' => '部署名',
+        'user_name' => '部長名',
+        'client_name' => '依頼者名',
+        'e-mail' => '依頼者メールアドレス',
+        'phone_number' => '依頼者電話番号',
+        ],
 
 ];

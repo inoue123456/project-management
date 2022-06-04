@@ -16,14 +16,10 @@ class Project extends Model
         'deadline_date',
         ];
     
-    public static $rules = array(
+    public static $project_rules = array(
         'name' => 'required',
         'contract_date' => 'required',
         'deadline_date' => 'required|after:contract_date',
-        'company_name' => 'required',
-        'client_name' => 'required',
-        'e-mail' => 'required',
-        'phone_number' => 'required'
     );
     
     public function user() {
