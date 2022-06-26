@@ -39,10 +39,10 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ action('Admin\TaskController@create') }}">タスク登録</a>
+                            <a class="nav-link" href="{{ route('task.create') }}">タスク登録</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ action('Admin\PersonalTaskController@create') }}">担当者タスク登録</a>
+                            <a class="nav-link" href="{{ route('personaltask.create') }}">担当者タスク登録</a>
                         </li>
                         <!-- Authentication Links -->
                         @guest
@@ -61,6 +61,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('passwordChange') }}">
+                                        {{ __('パスワード変更') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -70,6 +73,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+                                    
                                 </div>
                             </li>
                         @endguest
