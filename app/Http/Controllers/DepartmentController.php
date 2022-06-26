@@ -29,8 +29,24 @@ class DepartmentController extends Controller
     
     public function index()
     {
-        return view('department.index', ['departments' => Department::all()]);
+        $departments = Department::all();
+        //dd($departments);
+        /*foreach($departments as $department) {
+            $leader = User::where('id', $department->user_id)->first();
+            $leader_array = array($leader->name);
+            //$leaders = array_merge($leader);
+        dd($leader_array);
+        }
+        //*/
+        return view('department.index', ['departments'=> Department::all() ]);
     }
     
+    /*public function index()
+    {
+        $members = DB::select('select * from members');
+        $data = ['departments' => $departments, 'members' => $members];
+        return view('members.index', $data);
+    }
+    //*/
     
 }

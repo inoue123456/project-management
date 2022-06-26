@@ -13,7 +13,11 @@ class Department extends Model
         'user_name' => 'required'
         );
         
-    public function user() {
+    public function users() {
         return $this->hasMany('App\User');
+    }
+    
+    public function user(){
+        return $this->belongsTo('App\User');
     }
 }
