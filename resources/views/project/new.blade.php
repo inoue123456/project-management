@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2>プロジェクト登録</h2>
-                <form action="{{ action('Admin\ProjectController@create') }}" method="post" enctype="multipart/form-data" >
+                <form action="{{ route('Project.create') }}" method="post" enctype="multipart/form-data" >
 
                     @if (count($errors) > 0)
                         <ul>
@@ -49,15 +49,30 @@
                     <div class="form-group row">
                         <label class="col-md-4">依頼者メールアドレス</label>
                         <div class="col-md-10">
-                            <input type="email" class="form-control" name="e-mail" value="{{ old('e-mail') }}">
+                            <input type="email" class="form-control" name="email" value="{{ old('email') }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-4">依頼者電話番号</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="phone_number" placeholder="ハイフンなしで入力してくれ"value="{{ old('phone_number') }}">
+                            <input type="text" class="form-control" name="phone_number" placeholder="ハイフンなしで入力してください。"value="{{ old('phone_number') }}">
                         </div>
                     </div>
+                    <br>
+                    <big><p>担当者</p></big>
+                    
+                    <div class="form-group row">
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="user_name[]" value="{{ old('user_name1') }}">
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="user_name[]" value="{{ old('user_name2') }}">
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="user_name[]" value="{{ old('user_name3') }}">
+                        </div>
+                    </div>
+                    
                     {{ csrf_field() }}
                     <input type="submit" class="btn btn-primary" value="登録">
                 </form>

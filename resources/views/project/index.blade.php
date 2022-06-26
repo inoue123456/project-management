@@ -21,8 +21,8 @@
               <td>{{ $project->name }}</th>
               <td>{{ $project->contract_date }}</td>
               <td>{{ $project->deadline_date }}</td>
-              <td><a href="{{ action('Admin\ProjectController@edit', $project) }}" class="btn btn-primary">編集</a></td>
-              <td><a href="{{ action('Admin\ProjectController@delete', $project) }}" class="btn btn-primary">削除</a></td>
+              <td><a href="{{ route('project.edit', $project) }}" class="btn btn-primary">編集</a></td>
+              <td><a href="{{ route('project.delete', $project) }}" class="btn btn-primary">削除</a></td>
               
             </tr>
             @endforeach
