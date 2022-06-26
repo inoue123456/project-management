@@ -20,14 +20,24 @@ class TaskController extends Controller
         $task = new Task;
         $form = $request->all();
         $task->fill($form);
-        if($form["project_id"] === '---'){
-            \Session::flash('err_msg', 'プロジェクトを選択してください。');
-            return redirect()->back();
-        }
         
-        //dd($form, $task->toArray());
-        $task->save();
+        function hasSelectedProject($form) {
+            return $form["project_id"] !== '---';
+        }
+        if(!hasSelectedProject($form)){
+            \Session::flash('err_msg', 'プロジェクトを選択してください。');
+        } else {
+            $task->save();
+        }
         return redirect()->back();
+    }
+    
+    public function showProgress(Project $project) {
+        //dd($project);
+        
+        $tasks = Task::where('project_id', $project->id)->get();
+        
+        return view('task.show_progress', compact('tasks'));
     }
     
 }
