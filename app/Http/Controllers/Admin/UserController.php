@@ -5,41 +5,111 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use App\Department;
+use Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
 
 class UserController extends Controller
 {
     public function add() {
-        return view('user.new');
+        return view('user.new', ['departments'=>Department::all()]);
     }
     
     public function create(Request $request) {
         $this->validate($request, User::$rules);
+        
         $user = new User;
+        
         $form = $request->all();
         $user->fill($form);
-        $user->save();
+        $pass = config('app.pass_key');
+        $user->password = Hash::make($pass);
+        
+        
+        function hasSelectedRole($form){
+           return $form['role'] !== '---';
+        }
+        
+        function hasSelectedDepartment($form){
+           return $form['department_id'] !== '---';
+        }
+        
+        if(hasSelectedRole($form) && hasSelectedDepartment($form)) {
+            if($form['role'] === '一般社員') {
+                $user->role = 0;
+            } elseif($form['role'] === '部長') {
+                $user->role = 5;
+            } elseif($form['role'] === 'admin') {
+                $user->role = 10;
+            }
+                $user->save();
+            } else {
+                if(!hasSelectedRole($form)) {
+                    \Session::flash('err_msg_role', '権限を選択してください。');
+                }
+                if(!hasSelectedDepartment($form)) {
+                    \Session::flash('err_msg_department', '所属を選択してください。');
+                }
+            }
         return redirect()->back();
     }
     
-    public function index() {
-        return view('user.index', ['users'=>User::all()]);
+    
+    
+    public function index(Request $request) {
+        $search_name = $request->search_name;
+        if ($search_name != '') {
+            $users = User::where('name', $search_name)->get();
+        } else {
+              $users = User::all();
+        }
+        return view('user.index', ['users' => $users, 'search_name' => $search_name]);
     }
     
-    public function showDetail($id)
+    public function showDetail(User $user)
     {
-        $user = User::find($id);
+        //$user = User::find($id);
         return view('user.detail', ['user' => $user]);
     }
     
     public function edit(User $user) {
-        return view('user.edit',compact('user'));
+        return view('user.edit', ['user' => $user, 'departments'=>Department::all()]);
     }
     
     public function update(Request $request, User $user)
     {
         $this->validate($request,User::$update_rules);
-        $user->fill($request->all())->update();
-        session()->flash('updated_done','更新が完了しました');
-        return redirect()->back();
+        $form = $request->all();
+        $user->fill($form);
+        
+        function hasSelectedRole($form){
+           return $form['role'] !== '---';
+        }
+        
+        function hasSelectedDepartment($form){
+           return $form['department_id'] !== '---';
+        }
+        
+        if(hasSelectedRole($form) && hasSelectedDepartment($form)) {
+            if($form['role'] === '一般社員') {
+                $user->role = 0;
+            } elseif($form['role'] === '部長') {
+                $user->role = 5;
+            } elseif($form['role'] === 'admin') {
+                $user->role = 10;
+            }
+            $user->update();
+            session()->flash('updated_done','更新が完了しました');
+            } else {
+                if(!hasSelectedRole($form)) {
+                    \Session::flash('err_msg_role', '権限を選択してください。');
+                }
+                if(!hasSelectedDepartment($form)) {
+                    \Session::flash('err_msg_department', '所属を選択してください。');
+                }
+            }
+        return redirect()->back(); 
     }
 }

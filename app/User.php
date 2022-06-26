@@ -15,9 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password', 'department_name', 'role'
-    ];
+    protected $guarded = array('id');
 
     /**
      * The attributes that should be hidden for arrays.
@@ -40,12 +38,21 @@ class User extends Authenticatable
     public static $rules = array(
         'name' => 'required', 
         'email' => 'required', 
-        'password' => 'required', 
-        'department_name' => 'required', 
+        'department_id' => 'required', 
         'role'=> 'required');
     
+    public static $update_rules = [
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255'],
+        
+    ];
+    
     public function projects() {
-        return $this->hasMany('App\Project');
+        return $this->belongsToMany('App\Project');
+    }
+    
+    public function personal_tasks() {
+        return $this->belongsToMany('App\PersonalTask');
     }
     
     public function departments() {
@@ -53,6 +60,15 @@ class User extends Authenticatable
     }
     
     public function isAdmin(){
-        return $this->role == 1;
+        return $this->role == 10;
     }
+    
+    public function isManager(){
+        return $this->role >= 5;
+    }
+    
+    /*public function isEmployee(){
+        return $this->role == 0;
+    }
+    //*/
 }
