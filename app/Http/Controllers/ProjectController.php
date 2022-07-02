@@ -75,9 +75,15 @@ class ProjectController extends Controller
         return redirect()->back();
     }
     
-   public function index()
+   public function index(Request $request)
     {
-        return view('project.index', ['projects'=> Project::all()]);
+        $search_project_name = $request->search_project_name;
+        if($search_project_name != '') {
+            $projects = Project::where('name', $search_project_name)->get();
+        } else {
+            $projects = Project::all();
+        }
+        return view('project.index', ['projects'=> $projects, 'search_project_name' => $search_project_name]);
     }
     
     public function edit(Request $request, Project $project)

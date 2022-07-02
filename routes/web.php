@@ -34,7 +34,7 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function() {
 Route::group(['prefix' => 'projects', 'middleware' => 'manager'], function() {
     Route::get('new', 'ProjectController@add');
     Route::post('new', 'ProjectController@create')->name('project.create');
-    Route::get('/', 'ProjectController@index');
+    Route::get('/', 'ProjectController@index')->name('project.index');
     Route::get('{project}/edit', 'ProjectController@edit')->name('project.edit');
     Route::post('/', 'ProjectController@update')->name('project.update');
     Route::get('{project}/delete', 'ProjectController@delete')->name('project.delete');
