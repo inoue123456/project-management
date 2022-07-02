@@ -12,7 +12,7 @@ class ClientController extends Controller
 {
     public function index(Request $request) {
         $search_name = $request->search_name;
-        if ($search_name != '') {
+        if ($search_name) {
             $clients = Client::where('name', $search_name)->get();
         } else {
               $clients = Client::all();
