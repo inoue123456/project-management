@@ -23,48 +23,39 @@ class ProjectController extends Controller
         $this->validate($request, $validation);
         
         $client_company = new ClientCompany;
-        $client_company_form = $request->only(['company_name']);
-        $company_name = $client_company_form ['company_name'];
-        
-        if(!ClientCompany::where('company_name', $client_company_form)->exists()) {
-            $client_company->fill($client_company_form);
+        $company_name = $request->company_name;
+        if(!ClientCompany::where('company_name', $company_name)->exists()) {
+            $client_company->company_name = $company_name;
             $client_company->save();
         };
         
-        $picked_company = ClientCompany::where('company_name', $client_company_form)->first();
-        $company_id = $picked_company->id;
         $client = new Client;
         $client_form = $request->only(['client_name', 'email', 'phone_number']);
-        $client_email = $client_form ['email'];
-
-        if(!Client::where('email', $client_email)->exists()) {
+        if(!Client::where('email', $client_form ['email'])->exists()) {
             $client->fill($client_form);
-            $client->client_company_id = $company_id;
+            $client->client_company_id = ClientCompany::where('company_name', $company_name)->first()->id;
             $client->save();
         }
         
-        $picked_client = Client::where('email', $client_email)->first();
-        
-        $client_id = $picked_client->id;
         $project = new Project;
-        $form = $request->only(['name','contract_date', 'deadline_date']);
-        $project->fill($form);
+        $project->fill($request->only(['name','contract_date', 'deadline_date']));
         $project->user_id = Auth::id();
-        $project->client_id = $client_id;
+        $project->client_id = Client::where('email', $client_form ['email'])->first()->id;
         $project->save();
         
-        /*$user_names = $request->get('user_names', []);
-        if (in_array(null, $user_names, true)) {
-            $user_names_null_delete = array_diff($user_names, array(null));
-            $user_names_null_delete = array_values($user_names_null_delete);
-            $project->users()->sync($user_names_null_delete);
-        } else {
-            $project->users()->sync($request->get('user_names', []));
+        $user_names = $request->get('user_name', []);
+        foreach($user_names as $user_name) {
+            if($user_name) {
+                $user_id = User::where('name', $user_name)->first()->id;
+                $project->users()->attach([$user_id]);
+            }
         }
-        //$project->users()->sync($request->get('user_names', []));
-        //*/
         
-        //以下改善必要
+        /*
+        ※attach()は登録内容が重複してもOK (上のようにforeachで同じidでいくつか登録するときに使える)
+        一方sync()は重複しても最後の値だけ登録(上だといくつかあるuser_nameから抽出されたuser_idの最後に抽出したuser_idだけ登録される)
+        
+        以下を上の内容に改善
         $user_name1 = $request->get('user_name1');
         $user1 = User::where('name', $user_name1)->first();
         
@@ -80,7 +71,7 @@ class ProjectController extends Controller
             $user3 = User::where('name', $user_name3)->first();
             $project->users()->sync([$user1->id, $user3->id]);
         } 
-        
+        //*/
         return redirect()->back();
     }
     
