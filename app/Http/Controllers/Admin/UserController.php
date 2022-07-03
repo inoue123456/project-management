@@ -60,7 +60,7 @@ class UserController extends Controller
     
     public function index(Request $request) {
         $search_name = $request->search_name;
-        if ($search_name != '') {
+        if ($search_name) {
             $users = User::where('name', $search_name)->get();
         } else {
               $users = User::all();
@@ -111,5 +111,11 @@ class UserController extends Controller
                 }
             }
         return redirect()->back(); 
+    }
+    
+    public function delete(Request $request, User $user)
+    {
+        $user->delete();
+        return redirect()->back();
     }
 }
