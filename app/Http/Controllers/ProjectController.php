@@ -19,6 +19,7 @@ class ProjectController extends Controller
     }
     public function create(Request $request)
     {
+        
         $validation = array_merge(Project::$project_rules, Client::$client_rules, ClientCompany::$client_company_rule);
         $this->validate($request, $validation);
         
@@ -44,16 +45,24 @@ class ProjectController extends Controller
         $project->save();
         
         $user_names = $request->get('user_name', []);
+        
+        foreach($user_names as $user_name) {
+            if($user_name) {
+                $user_ids[] = User::where('name', $user_name)->first()->id;
+            }
+        }
+        $project->users()->sync($user_ids);
+        
+        /*
+        パターン2
+        $user_names = $request->get('user_name', []);
+        dd($user_names);
         foreach($user_names as $user_name) {
             if($user_name) {
                 $user_id = User::where('name', $user_name)->first()->id;
                 $project->users()->attach([$user_id]);
             }
         }
-        
-        /*
-        ※attach()は登録内容が重複してもOK (上のようにforeachで同じidでいくつか登録するときに使える)
-        一方sync()は重複しても最後の値だけ登録(上だといくつかあるuser_nameから抽出されたuser_idの最後に抽出したuser_idだけ登録される)
         
         以下を上の内容に改善
         $user_name1 = $request->get('user_name1');
@@ -102,7 +111,14 @@ class ProjectController extends Controller
         $project = Project::find($request->id);
         $project_form = $request->all();
         $project->fill($project_form)->save();
-
+        
+        $user_names = $request->get('user_name', []);
+        foreach($user_names as $user_name) {
+            if($user_name) {
+                $user_id = User::where('name', $user_name)->first()->id;
+                $project->users()->attach([$user_id]);
+            }
+        }
         return view('project.index', ['projects'=> Project::all()]);
        
     }
