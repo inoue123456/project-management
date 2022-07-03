@@ -115,11 +115,12 @@ class ProjectController extends Controller
         $user_names = $request->get('user_name', []);
         foreach($user_names as $user_name) {
             if($user_name) {
-                $user_id = User::where('name', $user_name)->first()->id;
-                $project->users()->attach([$user_id]);
+                $user_ids[] = User::where('name', $user_name)->first()->id;
             }
         }
-        return view('project.index', ['projects'=> Project::all()]);
+        $project->users()->sync($user_ids);
+        $search_project_name = $request->search_project_name;
+        return view('project.index', ['projects'=> Project::all(), 'search_project_name' => $search_project_name]);
        
     }
     
