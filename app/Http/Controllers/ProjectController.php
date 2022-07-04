@@ -87,8 +87,10 @@ class ProjectController extends Controller
    public function index(Request $request)
     {
         $search_project_name = $request->search_project_name;
+        $seach_query = Project::query();
         if($search_project_name) {
-            $projects = Project::where('name', $search_project_name)->get();
+            $seach_query->where('name', $search_project_name);
+            $projects = $seach_query->get();
         } else {
             $projects = Project::all();
         }

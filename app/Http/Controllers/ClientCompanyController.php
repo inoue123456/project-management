@@ -11,8 +11,10 @@ class ClientCompanyController extends Controller
 {
    public function index(Request $request) {
         $search_name = $request->search_name;
-        if ($search_name != '') {
-            $client_companies = ClientCompany::where('name', $search_name)->get();
+        $search_query = ClientCompany::query();
+        if ($search_name) {
+            $search_query->where('name', $search_name);
+            $client_companies = $search_query->get();
         } else {
             $client_companies = ClientCompany::all();
         }

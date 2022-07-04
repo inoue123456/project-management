@@ -12,10 +12,12 @@ class ClientController extends Controller
 {
     public function index(Request $request) {
         $search_name = $request->search_name;
+        $search_query = Client::query();
         if ($search_name) {
-            $clients = Client::where('name', $search_name)->get();
+            $search_query->where('name', $search_name);
+            $clients = $search_query->get();
         } else {
-              $clients = Client::all();
+            $clients = Client::all();
         }
         return view('client.index', compact(['clients', 'search_name']));
     }
