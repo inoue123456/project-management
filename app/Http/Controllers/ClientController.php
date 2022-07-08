@@ -22,6 +22,11 @@ class ClientController extends Controller
         return view('client.index', compact(['clients', 'search_name']));
     }
     
+    public function showDetail(Client $client)
+    {
+        return view('client.detail', compact('client'));
+    }
+    
     public function edit(Client $client) {
         return view('client.edit', compact('client'));
     }
@@ -40,4 +45,5 @@ class ClientController extends Controller
         $client->delete();
         return redirect()->back();
     }
+    
 }
