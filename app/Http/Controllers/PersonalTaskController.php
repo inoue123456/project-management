@@ -17,18 +17,34 @@ class PersonalTaskController extends Controller
     public function create(Request $request) {
         $this->validate($request, PersonalTask::$rules);
         $personal_task = new PersonalTask;
-        $form = $request->all();
-        $personal_task->fill($form);
+        $personal_task->fill($request->all());
         if($form["task_id"] === '---'){
             \Session::flash('err_msg', 'タスクを選択してください。');
-            return redirect()->back();
+        } else {
+            $personal_task->save();
         }
-        $personal_task->save();
+        
         $user = Auth::id();
         
         $personal_task->users()->sync([$user]);
         
         return redirect()->back();
+    }
+    
+    public function edit(PersonalTask $personal_task) {
+        return view('personaltask.edit', ['personal_task' => $personal_task, 'tasks'=>Task::all()]);
+    }
+    
+    public function update(Request $request, PersonalTask $personal_task)
+    {
+        $this->validate($request, PersonalTask::$rules);
+        $personal_task->fill($request->all())->save();
+        return redirect()->back();
+    }
+    
+    public function showDetail(PersonalTask $personal_task)
+    {
+        return view('personaltask.detail', compact('personal_task'));
     }
     
     public function showProgress() {
