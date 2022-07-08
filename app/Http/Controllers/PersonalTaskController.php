@@ -42,11 +42,6 @@ class PersonalTaskController extends Controller
         return redirect()->back();
     }
     
-    public function showDetail(PersonalTask $personal_task)
-    {
-        return view('personaltask.detail', compact('personal_task'));
-    }
-    
     public function showProgress() {
         $personal_tasks = Auth::user()->personal_tasks()->orderBy('personaltask_name')->get();
         return view('personaltask.show_progress', compact('personal_tasks'));
