@@ -4,7 +4,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-10 col-md-offset-2">
-        <h5><a href="{{ route('personaltask.showProgress') }}">私の進行状況</a></h5>
+        <h5><a href="{{ route('personal_task.showProgress') }}">私の進行状況</a></h5>
         <h5>お知らせ</h5>
         <ul>★</ul>
         <h5>担当プロジェクト</h5>
