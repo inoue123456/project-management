@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-    protected $fillable = ['project_id', 'task_name', 'deadline_date'];
+    protected $fillable = ['project_id', 'task_name', 'progress', 'deadline_date'];
     
     public static $rules = array(
         'project_id' => 'required',
