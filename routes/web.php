@@ -21,6 +21,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
     Route::get('user/{user}', 'Admin\UserController@showDetail')->name('user.showDetail');
     Route::get('user/{user}/edit', 'Admin\UserController@edit')->name('user.edit');
     Route::post('user/{user}/edit', 'Admin\UserController@update')->name('user.update');
+    Route::get('user/{user}/delete', 'Admin\UserController@delete')->name('user.delete');
     Route::get('notification/new', 'Admin\NotificationController@add');
     Route::post('notification/new', 'Admin\NotificationController@create');
 });
@@ -50,8 +51,11 @@ Route::group(['prefix' => 'tasks', 'middleware' => 'auth'], function() {
 
 Route::group(['prefix' => 'personaltasks', 'middleware' => 'auth'], function() {
     Route::get('new', 'PersonalTaskController@add');
-    Route::post('new', 'PersonalTaskController@create')->name('personaltask.create');
-    Route::get('showprogress', 'PersonalTaskController@showProgress')->name('personaltask.showProgress');
+    Route::post('new', 'PersonalTaskController@create')->name('personal_task.create');
+    Route::get('{personal_task}/edit', 'PersonalTaskController@edit')->name('personal_task.edit');
+    Route::post('{personal_task}/edit', 'PersonalTaskController@update')->name('personal_task.update');
+    Route::get('showprogress', 'PersonalTaskController@showProgress')->name('personal_task.showProgress');
+    Route::get('{personal_task}/detail', 'PersonalTaskController@showDetail')->name('personal_task.showDetail');
 });
 
 Route::group(['prefix' => 'clientcompanies', 'middleware' => 'manager'], function() {
@@ -67,6 +71,7 @@ Route::group(['prefix' => 'clients', 'middleware' => 'manager'], function() {
     Route::post('{client}/edit', 'ClientController@upadate')->name('client.update');
     Route::get('{client}/delete', 'ClientController@delete')->name('client.delete');
 });
+Route::get('client/{client}/showdetail', 'ClientController@showDetail')->middleware('auth')->name('client.showDetail');
 
 Route::group(['prefix' => 'departments', 'middleware' => 'manager'], function() {
     Route::get('new', 'DepartmentController@add');
