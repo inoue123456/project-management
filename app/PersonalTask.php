@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PersonalTask extends Model
 {
     protected $table = 'personal_tasks';
-    protected $fillable = ['task_id', 'personaltask_name', 'deadline_date'];
+    protected $fillable = ['task_id', 'personaltask_name','progress', 'deadline_date'];
     
     public static $rules = array(
         'task_id' => 'required',
