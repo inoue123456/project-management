@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Project;
 use App\Task;
+use App\Client;
 
 class TaskController extends Controller
 {
@@ -36,8 +37,9 @@ class TaskController extends Controller
         //dd($project);
         
         $tasks = Task::where('project_id', $project->id)->get();
-        
-        return view('task.show_progress', compact('tasks'));
+        $client = Client::where('id', $project->client_id)->first();
+        //dd($client);
+        return view('task.show_progress', compact('project','client','tasks'));
     }
     
 }

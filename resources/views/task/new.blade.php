@@ -1,11 +1,11 @@
 @extends('layouts.app')
-
+@section('title', 'タスク登録')
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2>タスク登録</h2>
-                <form action="{{ action('TaskController@create') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('personal_task.create') }}" method="post" enctype="multipart/form-data">
 
                     @if (count($errors) > 0)
                         <ul>
@@ -37,7 +37,16 @@
                             <input type="text" class="form-control" name="task_name" value="{{ old('task_name') }}">
                         </div>
                     </div>
-                    
+                    <div class="form-group row">
+                        <label class="col-md-3">進行状況</label>
+                            <div class="col-md-10">
+                                <select class="form-control" name="progress">
+                                    <option value="未着手">未着手</option>
+                                    <option value="作業中">作業中</option>
+                                    <option value="完了">完了</option>
+                                </select>
+                            </div>
+                    </div>
                     <div class="form-group row">
                         <label class="col-md-3">納期</label>
                         <div class="col-md-10">
