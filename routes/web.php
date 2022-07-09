@@ -27,9 +27,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
 });
 
 Route::group(['prefix' => '/', 'middleware' => 'auth'], function() {
-    Route::get('setting', 'EmployeeController@passwordChange')->name('passwordChange');
-    Route::post('setting', 'EmployeeController@setting')->name('setting');
-    Route::get('', 'EmployeeController@home');
+    Route::get('setting', 'UserController@passwordChange')->name('passwordChange');
+    Route::post('setting', 'UserController@setting')->name('setting');
+    Route::get('', 'UserController@home');
 });
 
 Route::group(['prefix' => 'projects', 'middleware' => 'manager'], function() {

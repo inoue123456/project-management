@@ -44,7 +44,10 @@ class User extends Authenticatable
     public static $update_rules = [
         'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'email', 'max:255'],
-        
+    ];
+    
+    public static $password_change_rules = [
+        'new_password' => ['required', 'min:5'],
     ];
     
     public function projects() {

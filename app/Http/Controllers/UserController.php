@@ -10,20 +10,22 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\PersonalTask;
 
-class EmployeeController extends Controller
+class UserController extends Controller
 {
     public function passwordChange(User $user)
     {
         $check_user = Auth::user();
-           return view('employee.password_change')->with('user', $user);
+           return view('user.password_change')->with('user', $user);
     }
     
     public function setting(Request $request, User $user)
     {
+        $this->validate($request, User::$password_change_rules);
+        
         $user = Auth::user();
         //dd($user);
-        $new_password = $request->password;
-        $old_password = $request->currentpassword;
+        $new_password = $request->new_password;
+        $old_password = $request->current_password;
         $new_password_confirm = $request->password_confirmation;
         
         
@@ -43,7 +45,7 @@ class EmployeeController extends Controller
                 \Session::flash('changed_done','パスワードが正しく変更されました');
             } else {
                 \Session::flash('err_msg_password_null', '新しいパスワードを入力してください。');
-            } //0のときも'新しいパスワードを入力してください。'というエラー文が表示
+            } 
         } else {
             if(!matchCurrentPassword($old_password, $user)) {
                 \Session::flash('err_msg_currentpassword', '現在のパスワードが間違っています。');
@@ -83,6 +85,6 @@ class EmployeeController extends Controller
         
         $personal_tasks = Auth::user()->personal_tasks()->orderBy('personaltask_name')->get();
         
-        return view('employee.home', compact('projects', 'personal_tasks'));
+        return view('user.home', compact('projects', 'personal_tasks'));
     }
 }

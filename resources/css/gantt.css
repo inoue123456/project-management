@@ -1,19 +1,30 @@
 body,
 html {
+  font-family: "Roboto", sans-serif;
   background-color: #cddade;
   height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
- 
- 
+
+.header {
+  color: #202125;
+  margin-bottom: 40px;
+}
+.header h2 {
+  font-weight: 600;
+}
+.header p {
+  font-weight: 300;
+}
+
 .wrapper {
   max-width: 1200px;
   min-width: 700px;
   margin: 0 auto;
   padding: 40px;
 }
- 
+
 .gantt {
   display: grid;
   border: 0;
@@ -21,7 +32,7 @@ html {
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-  
+  box-shadow: 0 75px 125px -57px #7e8f94;
 }
 .gantt__row {
   display: grid;
@@ -41,7 +52,7 @@ html {
   border-top: 0;
 }
 .gantt__row--empty {
-  background-color: #ffd6d2 !important;
+  background-color: #ffd6d2;
   z-index: 1;
 }
 .gantt__row--empty .gantt__row-first {
@@ -58,7 +69,7 @@ html {
   display: block;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
-.gantt__row--lines span.marker {
+.gantt__row--lines .marker {
   background-color: rgba(10, 52, 68, 0.13);
   z-index: 2;
 }
@@ -71,13 +82,13 @@ html {
 }
 .gantt__row--months {
   color: #fff;
-  background-color: #0a3444 !important;
+  background-color: #0a3444;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   grid-template-columns: 150px repeat(12, 1fr);
 }
 .gantt__row--months .gantt__row-first {
-  border-top: 0 !important;
-  background-color: #0a3444 !important;
+  border-top: 0;
+  background-color: #0a3444;
 }
 .gantt__row--months span {
   text-align: center;
@@ -106,7 +117,9 @@ html {
   border-top: 1px solid rgba(221, 221, 221, 0.8);
 }
 .gantt__row-bars li {
+  font-weight: 500;
   text-align: left;
+  font-size: 14px;
   min-height: 15px;
   background-color: #55de84;
   padding: 5px 12px;
@@ -116,7 +129,9 @@ html {
   cursor: pointer;
   border-radius: 20px;
 }
- 
+.gantt__row-bars .stripes {
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255, 255, 255, 0.1) 5px, rgba(255, 255, 255, 0.1) 12px);
+}
 .gantt__row-bars li:before, .gantt__row-bars li:after {
   content: "";
   height: 100%;

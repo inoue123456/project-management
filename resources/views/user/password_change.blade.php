@@ -43,13 +43,13 @@
                     <div class="form-group row">
                         <label class="col-md-4">現在のパスワード</label>
                         <div class="col-md-10">
-                            <input type="password" class="form-control @error('currentpassword') is-invalid @enderror" name="currentpassword" autocomplete="new-password">
+                            <input type="password" class="form-control @error('currentpassword') is-invalid @enderror" name="current_password" autocomplete="new-password">
                         </div>
                     </div>
                     <div class="form-group row">    
                         <label class="col-md-4">新しいパスワード</label>
                         <div class="col-md-10">
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="new_password" autocomplete="new-password">
                         </div>
                     </div>
                     <div class="form-group row">

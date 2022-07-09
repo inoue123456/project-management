@@ -87,7 +87,7 @@ return [
     'min' => [
         'numeric' => 'The :attribute must be at least :min.',
         'file' => 'The :attribute must be at least :min kilobytes.',
-        'string' => 'The :attribute must be at least :min characters.',
+        'string' => ':attributeは:min文字以上で設定してください',
         'array' => 'The :attribute must have at least :min items.',
     ],
     'not_in' => 'The selected :attribute is invalid.',
@@ -158,6 +158,7 @@ return [
         'client_name' => '依頼者名',
         'e-mail' => '依頼者メールアドレス',
         'phone_number' => '依頼者電話番号',
+        'new_password' => 'パスワード'
         ],
 
 ];
