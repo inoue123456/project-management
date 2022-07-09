@@ -36,16 +36,11 @@ class UserController extends Controller
         
         function confirmedNewPassword($new_password, $new_password_confirm) {
                 return $new_password == $new_password_confirm;
-                //※$new_password と$new_password_confirmどちらもnullのとき登録されちゃう
         }
         
         if(matchCurrentPassword($old_password, $user) && confirmedNewPassword($new_password, $new_password_confirm)) {
-            if($new_password) {
-                $request->user()->fill(['password' => Hash::make($new_password)])->save();
-                \Session::flash('changed_done','パスワードが正しく変更されました');
-            } else {
-                \Session::flash('err_msg_password_null', '新しいパスワードを入力してください。');
-            } 
+            $request->user()->fill(['password' => Hash::make($new_password)])->save();
+            \Session::flash('changed_done','パスワードが正しく変更されました');
         } else {
             if(!matchCurrentPassword($old_password, $user)) {
                 \Session::flash('err_msg_currentpassword', '現在のパスワードが間違っています。');
