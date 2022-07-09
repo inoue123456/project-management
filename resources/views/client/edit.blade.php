@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', '顧客情報の編集')
 @section('content')
 <div class="container">
         <div class="row">

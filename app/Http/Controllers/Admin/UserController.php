@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 class UserController extends Controller
 {
     public function add() {
-        return view('user.new', ['departments'=>Department::all()]);
+        return view('admin.user.new', ['departments'=>Department::all()]);
     }
     
     public function create(Request $request) {
@@ -65,17 +65,17 @@ class UserController extends Controller
         } else {
               $users = User::all();
         }
-        return view('user.index', ['users' => $users, 'search_name' => $search_name]);
+        return view('admin.user.index', ['users' => $users, 'search_name' => $search_name]);
     }
     
     public function showDetail(User $user)
     {
         //$user = User::find($id);
-        return view('user.detail', ['user' => $user]);
+        return view('admin.user.detail', ['user' => $user]);
     }
     
     public function edit(User $user) {
-        return view('user.edit', ['user' => $user, 'departments'=>Department::all()]);
+        return view('admin.user.edit', ['user' => $user, 'departments'=>Department::all()]);
     }
     
     public function update(Request $request, User $user)

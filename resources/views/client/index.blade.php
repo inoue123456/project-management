@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', '顧客情報一覧')
 @section('content')
 <div class="col-md-8 ml-auto">
     <form action="{{ route('client.index') }}" method="get">

@@ -101,9 +101,11 @@ class ProjectController extends Controller
     {
         //$project = Project::find($request->id);
         if (empty($project)) {
-        abort(404);    
-      }
-        return view('project.edit', ['project'=> $project]);
+        abort(404);
+        }
+        //$users = Project::with('users')->get();
+    
+        return view('project.edit', compact('project'));
     }
     
     public function update(Request $request)

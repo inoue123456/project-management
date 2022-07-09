@@ -1,10 +1,10 @@
 @extends('layouts.app')
-
+@section('title', '顧客会社情報編集')
 @section('content')
 <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <h2>会社名編集</h2>
+                <h2>顧客会社情報編集</h2>
                 <form action="{{ route('client_company.update', $client_company) }}" method="post" enctype="multipart/form-data">
 
                     @if (count($errors) > 0)
