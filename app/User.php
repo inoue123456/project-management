@@ -47,7 +47,9 @@ class User extends Authenticatable
     ];
     
     public static $password_change_rules = [
-        'new_password' => ['required', 'min:5'],
+        'current_password' => ['required', 'password'],
+        'password' => ['required', 'min:5', 'confirmed'],
+        'password_confirmation' => ['required'],
     ];
     
     public function projects() {
