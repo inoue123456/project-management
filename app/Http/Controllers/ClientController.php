@@ -16,8 +16,6 @@ class ClientController extends Controller
         if ($search_name) {
             $search_query->where('name', $search_name);
             $clients = $search_query->get();
-        } else {
-            $clients = Client::all();
         }
         return view('client.index', compact(['clients', 'search_name']));
     }

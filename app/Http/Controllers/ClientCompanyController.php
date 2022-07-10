@@ -15,8 +15,6 @@ class ClientCompanyController extends Controller
         if ($search_name) {
             $search_query->where('name', $search_name);
             $client_companies = $search_query->get();
-        } else {
-            $client_companies = ClientCompany::all();
         }
         return view('client_company.index', compact(['client_companies', 'search_name']));
     }
