@@ -12,14 +12,11 @@ use App\PersonalTask;
 
 class UserController extends Controller
 {
-    public function passwordChange(User $user)
-    {
-        $check_user = Auth::user();
-           return view('user.password_change')->with('user', $user);
+    public function passwordChange() {
+        return view('user.password_change');
     }
     
-    public function setting(Request $request, User $user)
-    {
+    public function setting(Request $request, User $user) {
         $this->validate($request, User::$password_change_rules);
         $request->user()->fill(['password' => Hash::make($request->password)])->save();
         return redirect()->back();
@@ -27,7 +24,6 @@ class UserController extends Controller
     
     public function home() {
         $projects = Auth::user()->projects()->orderBy('name')->get();
-        $personal_tasks = Auth::user()->personal_tasks()->orderBy('personaltask_name')->get();
-        return view('user.home', compact('projects', 'personal_tasks'));
+        return view('user.home', compact('projects'));
     }
 }
