@@ -33,8 +33,7 @@ class ClientController extends Controller
     {
         $this->validate($request, Client::$client_rules);
       
-        $client_form = $request->all();
-        $client->fill($client_form)->save();
+        $client->fill($request->all())->save();
         return redirect()->back();
     }
     
