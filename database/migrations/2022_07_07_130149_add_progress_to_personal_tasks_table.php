@@ -14,7 +14,7 @@ class AddProgressToPersonalTasksTable extends Migration
     public function up()
     {
         Schema::table('personal_tasks', function (Blueprint $table) {
-            $table->string('progress');
+            $table->tinyInteger('progress');
         });
     }
 
