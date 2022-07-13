@@ -16,12 +16,8 @@ class DepartmentController extends Controller
     {
         $this->validate($request, Department::$rules);
         $department = new Department;
+        $user = User::where('name', $request->user_name)->first();
         $department->fill($request->only(['department_name']));
-        //部長名からユーザー名が一致するuser_idを取得
-        $user_name = $request->user_name;
-        //dd($user_name);
-        $user = User::where('name', $user_name)->first();
-        //dd($user);
         $department->user_id = $user->id;
         $department->save();
         return redirect()->back();

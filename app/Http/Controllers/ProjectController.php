@@ -52,35 +52,6 @@ class ProjectController extends Controller
             }
         }
         $project->users()->sync($user_ids);
-        
-        /*
-        パターン2
-        $user_names = $request->get('user_name', []);
-        dd($user_names);
-        foreach($user_names as $user_name) {
-            if($user_name) {
-                $user_id = User::where('name', $user_name)->first()->id;
-                $project->users()->attach([$user_id]);
-            }
-        }
-        
-        以下を上の内容に改善
-        $user_name1 = $request->get('user_name1');
-        $user1 = User::where('name', $user_name1)->first();
-        
-        $user_name2 = $request->get('user_name2');
-        $user_name3 = $request->get('user_name3');
-        
-        if($user_name2 == null && $user_name3 == null) {
-            $project->users()->sync($user1->id);
-        } elseif($user_name3 == null) {
-            $user2 = User::where('name', $user_name2)->first();
-            $project->users()->sync([$user1->id, $user2->id]);
-        } elseif ($user_name2 == null) {
-            $user3 = User::where('name', $user_name3)->first();
-            $project->users()->sync([$user1->id, $user3->id]);
-        } 
-        //*/
         return redirect()->back();
     }
     
@@ -97,12 +68,9 @@ class ProjectController extends Controller
     
     public function edit(Request $request, Project $project)
     {
-        //$project = Project::find($request->id);
         if (empty($project)) {
         abort(404);
         }
-        //$users = Project::with('users')->get();
-    
         return view('project.edit', compact('project'));
     }
     
@@ -123,22 +91,11 @@ class ProjectController extends Controller
         $project->users()->sync($user_ids);
         $search_project_name = $request->search_project_name;
         return view('project.index', ['projects'=> Project::all(), 'search_project_name' => $search_project_name]);
-       
     }
     
     public function delete(Request $request, Project $project)
     {
-        //$project = Project::find($request->id);
         $project->delete();
         return redirect()->back();
     }
-    
-    
-    public function showgantt()
-    {
-        return view('project.gantt', ['tasks' => Task::all()]);
-    }
-    
-    
-    
 }
