@@ -20,10 +20,10 @@
                         <tr>
                             <td>{{ $personal_task->personaltask_name }}</td>
                             <td>
-                                @if($personal_task->progress =='未着手'|| $personal_task->progress == '作業中')
-                                    <span class="text-white bg-danger">{{ $personal_task->progress }}</span>
+                                @if($personal_task->progress == 100)
+                                    <span class="text-white bg-primary">完了</span>
                                 @else
-                                    <span class="text-white bg-primary">{{ $personal_task->progress }}</span>
+                                    <span class="text-white .bg-warning">{{ $personal_task->progress }}%</span>
                                 @endif
                             </td>
                             <td>{{ $personal_task->deadline_date }}</td>

@@ -33,6 +33,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'tasks'], function() {
         Route::get('new', 'TaskController@add');
         Route::post('new', 'TaskController@create')->name('task.create');
+        Route::get('{task}/edit', 'TaskController@edit')->name('task.edit');
+        Route::post('{task}/edit', 'TaskController@update')->name('task.update');
     });
     Route::group(['prefix' => 'personaltasks'], function() {
         Route::get('new', 'PersonalTaskController@add');
@@ -54,7 +56,6 @@ Route::group(['middleware' => 'manager'], function() {
         Route::get('{project}/edit', 'ProjectController@edit')->name('project.edit');
         Route::post('/', 'ProjectController@update')->name('project.update');
         Route::get('{project}/delete', 'ProjectController@delete')->name('project.delete');
-        Route::get('{project}/tasks', 'ProjectController@showgantt');
     });
     Route::group(['prefix' => 'clientcompanies'], function() {
         Route::get('/', 'ClientCompanyController@index')->name('client_company.index');

@@ -12,6 +12,7 @@ class PersonalTask extends Model
     public static $rules = array(
         'task_id' => 'required',
         'personaltask_name' => 'required',
+        'progress' => 'required',
         'deadline_date' => 'required');
         
     public function task() {

@@ -21,8 +21,15 @@
                     @foreach ($tasks as $task)
                     <tr>
                         <td><a href="{{ route('personal_task.showProgress')}}">{{ $task->task_name }}</a></td>
-                        <td>進行状況</td>
+                        <td>
+                            @if($personal_task->progress == 100)
+                                <span class="text-white bg-primary">完了</span>
+                            @else
+                                <span class="text-white .bg-warning">{{ $personal_task->progress }}%</span>
+                            @endif
+                        </td>
                         <td>{{ $task->deadline_date }}</td>
+                        <td><a href="{{ route('task.edit', $task) }}" class="btn btn-primary">編集</a></td>
                     </tr>
                 @endforeach
                 </tbody>

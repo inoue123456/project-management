@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title', '担当者タスク登録')
+@section('title', 'タスク登録')
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <h2>担当者タスク登録</h2>
-                <form action="{{ action('PersonalTaskController@create') }}" method="post" enctype="multipart/form-data">
+                <h2>タスク登録</h2>
+                <form action="{{ route('task.update', $task) }}" method="post" enctype="multipart/form-data">
 
                     @if (count($errors) > 0)
                         <ul>
@@ -20,21 +20,21 @@
                         </ul>
                     @endif
                     <div class="form-group row">
-                        <label class="col-md-3">タスク</label>
+                        <label class="col-md-3">プロジェクト</label>
                             <div class="col-md-10">
-                                <select class="form-control" name="task_id">
+                                <select class="form-control" name="project_id">
                                     <option value="---">---</option>
-                                    @foreach($tasks as $task)
-                                    <option value="{{ $task->id }}">{{ $task->task_name }}</option>
+                                    @foreach($projects as $project)
+                                    <option value="{{ $project->id }}">{{ $project->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                     </div>
                     
                     <div class="form-group row">
-                        <label class="col-md-3">担当者タスク名</label>
+                        <label class="col-md-3">タスク名</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="personaltask_name" value="{{ old('personaltask_name') }}">
+                            <input type="text" class="form-control" name="task_name" value="{{ $task->task_name }}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -44,14 +44,14 @@
                             </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3">終了予定日</label>
+                        <label class="col-md-3">納期</label>
                         <div class="col-md-10">
-                            <input type="date" class="form-control" name="deadline_date" value="{{ old('deadline_date') }}">
+                            <input type="date" class="form-control" name="deadline_date" value="{{ $task->deadline_date }}">
                         </div>
                     </div>
                     
                     {{ csrf_field() }}
-                    <input type="submit" class="btn btn-primary" value="登録">
+                    <input type="submit" class="btn btn-primary" value="更新">
                 </form>
             </div>
         </div>

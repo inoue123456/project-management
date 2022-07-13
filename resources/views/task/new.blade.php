@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2>タスク登録</h2>
-                <form action="{{ route('personal_task.create') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('task.create') }}" method="post" enctype="multipart/form-data">
 
                     @if (count($errors) > 0)
                         <ul>
@@ -40,11 +40,7 @@
                     <div class="form-group row">
                         <label class="col-md-3">進行状況</label>
                             <div class="col-md-10">
-                                <select class="form-control" name="progress">
-                                    <option value="未着手">未着手</option>
-                                    <option value="作業中">作業中</option>
-                                    <option value="完了">完了</option>
-                                </select>
+                                <input type="number" class="form-control" name="progress" min="0" max="100">
                             </div>
                     </div>
                     <div class="form-group row">

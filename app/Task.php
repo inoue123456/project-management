@@ -11,6 +11,7 @@ class Task extends Model
     public static $rules = array(
         'project_id' => 'required',
         'task_name' => 'required',
+        'progress' => 'required',
         'deadline_date' => 'required',
         );
     

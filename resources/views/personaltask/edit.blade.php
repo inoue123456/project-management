@@ -36,11 +36,7 @@
                     <div class="form-group row">
                         <label class="col-md-3">進行状況</label>
                             <div class="col-md-10">
-                                <select class="form-control" name="progress">
-                                    <option value="未着手">未着手</option>
-                                    <option value="作業中">作業中</option>
-                                    <option value="完了">完了</option>
-                                </select>
+                                <input type="number" class="form-control" name="progress" min="0" max="100" value="{{ $personal_task->progress }}">
                             </div>
                     </div>
                     <div class="form-group row">

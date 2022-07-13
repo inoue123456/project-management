@@ -14,31 +14,39 @@ class TaskController extends Controller
         return view('task.new', ['projects'=>Project::all()]);
     }
     
-    
     public function create(Request $request) {
         $this->validate($request, Task::$rules);
         
         $task = new Task;
         $form = $request->all();
-        $task->fill($form);
         
         function hasSelectedProject($form) {
             return $form["project_id"] !== '---';
         }
+        
         if(!hasSelectedProject($form)){
             \Session::flash('err_msg', 'プロジェクトを選択してください。');
         } else {
+            $task->fill($form);
             $task->save();
         }
         return redirect()->back();
     }
     
+    public function edit(PersonalTask $task) {
+        return view('task.edit', ['task' => $task, 'projects'=>Project::all()]);
+    }
+    
+    public function update(Request $request, Task $task)
+    {
+        $this->validate($request, Task::$rules);
+        $task->fill($request->all())->save();
+        return redirect()->back();
+    }
+    
     public function showProgress(Project $project) {
-        //dd($project);
-        
         $tasks = Task::where('project_id', $project->id)->get();
         $client = Client::where('id', $project->client_id)->first();
-        //dd($client);
         return view('task.show_progress', compact('project','client','tasks'));
     }
     
