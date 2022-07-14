@@ -61,8 +61,9 @@ class ProjectController extends Controller
         $seach_query = Project::query();
         if($search_project_name) {
             $seach_query->where('name', $search_project_name);
-            $projects = $seach_query->get();
+            
         }
+        $projects = $seach_query->get();
         return view('project.index', ['projects'=> $projects, 'search_project_name' => $search_project_name]);
     }
     

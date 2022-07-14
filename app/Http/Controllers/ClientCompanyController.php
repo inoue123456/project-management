@@ -14,9 +14,9 @@ class ClientCompanyController extends Controller
         $search_query = ClientCompany::query();
         if ($search_name) {
             $search_query->where('name', $search_name);
-            $client_companies = $search_query->get();
         }
-        return view('client_company.index', compact(['client_companies', 'search_name']));
+        $client_companies = $search_query->get();
+        return view('client_company.index', compact('client_companies', 'search_name'));
     }
     
     public function edit(ClientCompany $client_company) {
@@ -28,7 +28,7 @@ class ClientCompanyController extends Controller
         $this->validate($request, ClientCompany::$client_company_rule);
       
         $client_company_form = $request->all();
-        $client_company->fill($client_company_form)->save();
+        $client_company->fill($client_company_form)->update();
         return redirect()->back();
     }
     

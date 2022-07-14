@@ -11,7 +11,8 @@ use App\Client;
 class TaskController extends Controller
 {
     public function add() {
-        return view('task.new', ['projects'=>Project::all()]);
+        $projects = Project::all();
+        return view('task.new', compact('projects'));
     }
     
     public function create(Request $request) {
@@ -33,14 +34,21 @@ class TaskController extends Controller
         return redirect()->back();
     }
     
-    public function edit(PersonalTask $task) {
-        return view('task.edit', ['task' => $task, 'projects'=>Project::all()]);
+    public function edit(Task $task) {
+        $projects = Project::all();
+        return view('task.edit', compact('task', 'projects'));
     }
     
     public function update(Request $request, Task $task)
     {
         $this->validate($request, Task::$rules);
-        $task->fill($request->all())->save();
+        $task->fill($request->all())->update();
+        return redirect()->back();
+    }
+    
+    public function delete(Request $request, Task $task)
+    {
+        $task->delete();
         return redirect()->back();
     }
     

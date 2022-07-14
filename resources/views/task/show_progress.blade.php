@@ -15,6 +15,7 @@
                         <th>進行状況</td>
                         <th>納期</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,11 +26,12 @@
                             @if($personal_task->progress == 100)
                                 <span class="text-white bg-primary">完了</span>
                             @else
-                                <span class="text-white .bg-warning">{{ $personal_task->progress }}%</span>
+                                <span class="text-white .bg-warning">{{ $task->progress }}%</span>
                             @endif
                         </td>
                         <td>{{ $task->deadline_date }}</td>
                         <td><a href="{{ route('task.edit', $task) }}" class="btn btn-primary">編集</a></td>
+                        <td><a href="{{ route('task.delete', $task) }}" class="btn btn-primary">削除</a></td>
                     </tr>
                 @endforeach
                 </tbody>

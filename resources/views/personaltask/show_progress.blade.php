@@ -13,6 +13,7 @@
                         <th>進行状況</th>
                         <th>終了予定日</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,6 +29,7 @@
                             </td>
                             <td>{{ $personal_task->deadline_date }}</td>
                             <td><a href="{{ route('personal_task.edit', $personal_task) }}" class="btn btn-primary">編集</a></td>
+                            <td><a href="{{ route('personal_task.delete', $personal_task) }}" class="btn btn-primary">削除</a></td>
                         </tr>
                     @endforeach
                 </tbody>

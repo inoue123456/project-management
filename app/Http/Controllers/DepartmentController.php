@@ -28,4 +28,27 @@ class DepartmentController extends Controller
         return view('department.index', ['departments'=> Department::all() ]);
     }
     
+    public function edit(Request $request, Department $department)
+    {
+        if (empty($department)) {
+        abort(404);
+        }
+        return view('department.edit', compact('department'));
+    }
+    
+    public function update(Request $request)
+    {
+        $this->validate($request, Department::$project_rules);
+      
+        $department->fill($request->all());
+        $department->update();
+        return redirect()->back();
+    }
+    
+    public function delete(Request $request, Department $department)
+    {
+        $department->delete();
+        return redirect()->back();
+    }
+    
 }

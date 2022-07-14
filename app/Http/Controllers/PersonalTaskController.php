@@ -23,11 +23,8 @@ class PersonalTaskController extends Controller
         } else {
             $personal_task->save();
         }
-        
         $user = Auth::id();
-        
         $personal_task->users()->sync([$user]);
-        
         return redirect()->back();
     }
     
@@ -38,7 +35,13 @@ class PersonalTaskController extends Controller
     public function update(Request $request, PersonalTask $personal_task)
     {
         $this->validate($request, PersonalTask::$rules);
-        $personal_task->fill($request->all())->save();
+        $personal_task->fill($request->all())->update();
+        return redirect()->back();
+    }
+    
+    public function delete(Request $request, PersonalTask $personal_task)
+    {
+        $personal_task->delete();
         return redirect()->back();
     }
     

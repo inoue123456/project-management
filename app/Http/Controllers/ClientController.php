@@ -15,9 +15,9 @@ class ClientController extends Controller
         $search_query = Client::query();
         if ($search_name) {
             $search_query->where('name', $search_name);
-            $clients = $search_query->get();
         }
-        return view('client.index', compact(['clients', 'search_name']));
+        $clients = $search_query->get();
+        return view('client.index', compact('clients', 'search_name'));
     }
     
     public function showDetail(Client $client)
@@ -33,7 +33,7 @@ class ClientController extends Controller
     {
         $this->validate($request, Client::$client_rules);
       
-        $client->fill($request->all())->save();
+        $client->fill($request->all())->upadate();
         return redirect()->back();
     }
     

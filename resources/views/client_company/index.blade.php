@@ -30,10 +30,8 @@
                 <tr>
                     <th scope="row">{{$client_company->id}}</th>
                     <td>{{$client_company->company_name}}</a></td>
-                    <td>
-                        <a href="{{ route('client_company.edit', $client_company) }}" class="btn btn-primary">編集</a>
-                        <a href="{{ route('client_company.delete', $client_company) }}" class="btn btn-primary">削除</a>
-                    </td>
+                    <td><a href="{{ route('client_company.edit', $client_company) }}" class="btn btn-primary">編集</a></td>
+                    <td><a href="{{ route('client_company.delete', $client_company) }}" class="btn btn-primary">削除</a></td>
                 </tr>
             @endforeach
         </tbody>

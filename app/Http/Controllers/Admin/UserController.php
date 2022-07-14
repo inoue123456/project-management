@@ -14,7 +14,8 @@ use Illuminate\Support\Str;
 class UserController extends Controller
 {
     public function add() {
-        return view('admin.user.new', ['departments'=>Department::all()]);
+        $departments = Department::all();
+        return view('user.admin.new', compact('departments'));
     }
     
     public function create(Request $request) {
@@ -65,24 +66,24 @@ class UserController extends Controller
         } else {
               $users = User::all();
         }
-        return view('admin.user.index', ['users' => $users, 'search_name' => $search_name]);
+        return view('user.admin.index', compact('users', 'search_name'));
     }
     
     public function showDetail(User $user)
     {
-        //$user = User::find($id);
-        return view('admin.user.detail', ['user' => $user]);
+        return view('user.admin.detail', compact('user'));
     }
     
     public function edit(User $user) {
-        return view('admin.user.edit', ['user' => $user, 'departments'=>Department::all()]);
+        $departments=Department::all();
+        return view('user.admin.edit', compact('user', 'departments'));
     }
     
     public function update(Request $request, User $user)
     {
         $this->validate($request,User::$update_rules);
         $form = $request->all();
-        $user->fill($form);
+        
         
         function hasSelectedRole($form){
            return $form['role'] !== '---';
@@ -100,6 +101,7 @@ class UserController extends Controller
             } elseif($form['role'] === 'admin') {
                 $user->role = 10;
             }
+            $user->fill($form);
             $user->update();
             session()->flash('updated_done','更新が完了しました');
             } else {

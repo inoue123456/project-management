@@ -17,6 +17,9 @@
             <tr>
               <td>{{ $department->department_name }}</th>
               <td>{{ $department->user->name }}</td>
+              <td>
+                <a href="{{ route('department.edit', $department) }}" class="btn btn-primary">編集</a>
+                <a href="{{ route('department.delete', $department) }}" class="btn btn-primary">削除</a>
             </tr>
             @endforeach
             </tbody>
