@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 use App\Project;
 use App\Task;
 use App\Client;
+use App\User;
+use Auth;
 
 class TaskController extends Controller
 {
     public function add() {
-        $projects = Project::all();
+        $projects = Auth::user()->projects()->get();
         return view('task.new', compact('projects'));
     }
     
@@ -39,15 +41,13 @@ class TaskController extends Controller
         return view('task.edit', compact('task', 'projects'));
     }
     
-    public function update(Request $request, Task $task)
-    {
+    public function update(Request $request, Task $task) {
         $this->validate($request, Task::$rules);
         $task->fill($request->all())->update();
         return redirect()->back();
     }
     
-    public function delete(Request $request, Task $task)
-    {
+    public function delete(Request $request, Task $task) {
         $task->delete();
         return redirect()->back();
     }

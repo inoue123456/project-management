@@ -11,7 +11,11 @@ use Auth;
 class PersonalTaskController extends Controller
 {
     public function add() {
-        return view('personaltask.new', ['tasks'=>Task::all()]);
+        $projects = Auth::user()->projects()->get();
+        foreach($projects as $project) {
+            $tasks = Task::where('project_id', $project->id)->get();
+        }
+        return view('personaltask.new', compact('tasks'));
     }
     
     public function create(Request $request) {
