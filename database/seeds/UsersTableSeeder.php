@@ -12,12 +12,15 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        $users = factory(App\User::class, 5)->create();
+        
+        /*DB::table('users')->insert([
             'name' => 'inoue',
             'email' => 'ino@mail.com',
             'password' => bcrypt('123456'),
             'role' => '10',
             'department_id' => '1',
         ]);
+        //*/
     }
 }
