@@ -23,7 +23,11 @@
                             @if($personal_task->progress == 100)
                                 <td class="bg-primary text-white">{{ $personal_task->progress }}%  完了</td>
                             @else
-                                <td class="bg-warning text-dark">{{ $personal_task->progress }}%  作業中</td>
+                                @if($task->progress == 0)
+                                    <td class="bg-danger text-white">{{ $personal_task->progress }}%  未着手</td>
+                                @else
+                                    <td class="bg-warning text-dark">{{ $personal_task->progress }}%  作業中</td>
+                                @endif
                             @endif
                             <td>{{ $personal_task->deadline_date }}</td>
                             <td><a href="{{ route('personal_task.edit', $personal_task) }}" class="btn btn-primary">編集</a></td>
