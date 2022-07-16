@@ -15,7 +15,8 @@ use App\User;
 class ProjectController extends Controller
 {
     public function add() {
-        return view('project.new', ['users'=> User::all()]);
+        $users_in_department = User::where('department_id', Auth::user()->department_id)->get();
+        return view('project.new', compact('users_in_department'));
     }
     public function create(Request $request)
     {
@@ -44,13 +45,8 @@ class ProjectController extends Controller
         $project->client_id = Client::where('email', $client_form ['email'])->first()->id;
         $project->save();
         
-        $user_names = $request->get('user_name', []);
+        $user_ids = $request->get('user_name', []);
         
-        foreach($user_names as $user_name) {
-            if($user_name) {
-                $user_ids[] = User::where('name', $user_name)->first()->id;
-            }
-        }
         $project->users()->sync($user_ids);
         return redirect()->back();
     }
