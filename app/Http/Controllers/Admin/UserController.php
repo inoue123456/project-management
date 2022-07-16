@@ -83,7 +83,7 @@ class UserController extends Controller
     {
         $this->validate($request,User::$update_rules);
         $form = $request->all();
-        
+        $user->fill($form);
         
         function hasSelectedRole($form){
            return $form['role'] !== '---';
@@ -101,7 +101,6 @@ class UserController extends Controller
             } elseif($form['role'] === 'admin') {
                 $user->role = 10;
             }
-            $user->fill($form);
             $user->update();
             session()->flash('updated_done','更新が完了しました');
             } else {
