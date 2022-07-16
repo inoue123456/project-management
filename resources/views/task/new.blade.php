@@ -44,7 +44,7 @@
                             </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-3">納期</label>
+                        <label class="col-md-3">完了目標日</label>
                         <div class="col-md-10">
                             <input type="date" class="form-control" name="deadline_date" value="{{ old('deadline_date') }}">
                         </div>

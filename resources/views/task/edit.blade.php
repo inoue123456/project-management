@@ -23,7 +23,7 @@
                         <label class="col-md-3">プロジェクト</label>
                             <div class="col-md-10">
                                 <select class="form-control" name="project_id">
-                                    <option value="---">---</option>
+                                    <option value="{{ $task->project->id }}">{{ $task->project->name }}</option>
                                     @foreach($projects as $project)
                                     <option value="{{ $project->id }}">{{ $project->name }}</option>
                                     @endforeach
@@ -40,7 +40,7 @@
                     <div class="form-group row">
                         <label class="col-md-3">進行状況</label>
                             <div class="col-md-10">
-                                <input type="number" class="form-control" name="progress" min="0" max="100">
+                                <input type="number" class="form-control" name="progress" min="0" max="100" value="{{ $task->progress }}">
                             </div>
                     </div>
                     <div class="form-group row">

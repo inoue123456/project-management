@@ -23,7 +23,7 @@
                     <tr>
                         <td><a href="{{ route('personal_task.showProgress')}}">{{ $task->task_name }}</a></td>
                         <td>
-                            @if($personal_task->progress == 100)
+                            @if($task->progress == 100)
                                 <span class="text-white bg-primary">完了</span>
                             @else
                                 <span class="text-white .bg-warning">{{ $task->progress }}%</span>

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'プロジェクト編集')
+@section('title', '担当者タスク編集')
 @section('content')
     <div class="container">
         <div class="row">
@@ -19,7 +19,7 @@
                         <label class="col-md-3">タスク</label>
                             <div class="col-md-10">
                                 <select class="form-control" name="task_id">
-                                    <option value="---">---</option>
+                                    <option value="{{ $personal_task->task->id }}">{{ $personal_task->task->task_name }}</option>
                                     @foreach($tasks as $task)
                                     <option value="{{ $task->id }}">{{ $task->task_name }}</option>
                                     @endforeach

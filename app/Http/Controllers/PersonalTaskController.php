@@ -17,7 +17,8 @@ class PersonalTaskController extends Controller
     public function create(Request $request) {
         $this->validate($request, PersonalTask::$rules);
         $personal_task = new PersonalTask;
-        $personal_task->fill($request->all());
+        $form = $request->all();
+        $personal_task->fill($form);
         if($form["task_id"] === '---'){
             \Session::flash('err_msg', 'タスクを選択してください。');
         } else {
