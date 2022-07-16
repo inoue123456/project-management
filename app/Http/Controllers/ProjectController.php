@@ -89,7 +89,12 @@ class ProjectController extends Controller
         $search_project_name = $request->search_project_name;
         return view('project.index', ['projects'=> Project::all(), 'search_project_name' => $search_project_name]);
     }
-    
+
+    public function showDetail(Project $project)
+    {
+        return view('project.detail', compact('project'));
+    }
+
     public function delete(Request $request, Project $project)
     {
         $project->delete();

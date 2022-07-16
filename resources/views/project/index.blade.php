@@ -35,7 +35,7 @@
           <tbody>
             @foreach($projects as $project)
             <tr>
-              <td>{{ $project->name }}</th>
+              <td><a href="{{ route('project.showDetail', $project) }}">{{ $project->name }}</a></th>
               <td>{{ $project->contract_date }}</td>
               <td>{{ $project->deadline_date }}</td>
               <td><a href="{{ route('project.edit', $project) }}" class="btn btn-primary">編集</a></td>
