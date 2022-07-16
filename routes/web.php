@@ -57,6 +57,7 @@ Route::group(['middleware' => 'manager'], function() {
         Route::get('/', 'ProjectController@index')->name('project.index');
         Route::get('{project}/edit', 'ProjectController@edit')->name('project.edit');
         Route::post('/', 'ProjectController@update')->name('project.update');
+        Route::get('{project}', 'ProjectController@showDetail')->name('project.showDetail');
         Route::get('{project}/delete', 'ProjectController@delete')->name('project.delete');
     });
     Route::group(['prefix' => 'clientcompanies'], function() {
