@@ -12,8 +12,12 @@ class PersonalTaskController extends Controller
 {
     public function add() {
         $projects = Auth::user()->projects()->get();
-        foreach($projects as $project) {
-            $tasks = Task::where('project_id', $project->id)->get();
+        if($projects) {
+            $tasks = 'null';
+        } else {
+            foreach($projects as $project) {
+               $tasks[] = Task::where('project_id', $project->id)->get();
+            }
         }
         return view('personaltask.new', compact('tasks'));
     }

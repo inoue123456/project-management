@@ -21,14 +21,25 @@
                     @endif
                     <div class="form-group row">
                         <label class="col-md-3">タスク</label>
-                            <div class="col-md-10">
-                                <select class="form-control" name="task_id">
-                                    <option value="---">---</option>
-                                    @foreach($tasks as $task)
-                                    <option value="{{ $task->id }}">{{ $task->task_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            @if($tasks == 'null')
+                                <div class="col-md-10">
+                                    <select class="form-control" name="task_id">
+                                        <option value="---">---</option>
+                                    </select>
+                                </div>
+                            @else
+                                <div class="col-md-10">
+                                    <select class="form-control" name="task_id">
+                                        <option value="---">---</option>
+                                        @foreach($tasks as $task)
+                                            @foreach($task as $task_select)
+                                                <option value="{{ $task_select->id }}">{{ $task_select->task_name }}</option>
+                                            @endforeach
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
+                            
                     </div>
                     
                     <div class="form-group row">
