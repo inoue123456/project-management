@@ -41,15 +41,13 @@ class PersonalTaskController extends Controller
         return view('personaltask.edit', ['personal_task' => $personal_task, 'tasks'=>Task::all()]);
     }
     
-    public function update(Request $request, PersonalTask $personal_task)
-    {
+    public function update(Request $request, PersonalTask $personal_task) {
         $this->validate($request, PersonalTask::$rules);
         $personal_task->fill($request->all())->update();
         return redirect()->back();
     }
     
-    public function delete(Request $request, PersonalTask $personal_task)
-    {
+    public function delete(Request $request, PersonalTask $personal_task) {
         $personal_task->delete();
         return redirect()->back();
     }

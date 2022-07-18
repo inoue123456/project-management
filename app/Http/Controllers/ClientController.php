@@ -20,8 +20,7 @@ class ClientController extends Controller
         return view('client.index', compact('clients', 'search_name'));
     }
     
-    public function showDetail(Client $client)
-    {
+    public function showDetail(Client $client) {
         return view('client.detail', compact('client'));
     }
     
@@ -29,16 +28,14 @@ class ClientController extends Controller
         return view('client.edit', compact('client'));
     }
     
-    public function update(Request $request)
-    {
+    public function update(Request $request) {
         $this->validate($request, Client::$client_rules);
       
         $client->fill($request->all())->upadate();
         return redirect()->back();
     }
     
-    public function delete(Request $request, Client $client)
-    {
+    public function delete(Request $request, Client $client) {
         $client->delete();
         return redirect()->back();
     }

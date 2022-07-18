@@ -23,8 +23,7 @@ class ClientCompanyController extends Controller
         return view('client_company.edit', compact('client_company'));
     }
     
-    public function update(Request $request)
-    {
+    public function update(Request $request) {
         $this->validate($request, ClientCompany::$client_company_rule);
       
         $client_company_form = $request->all();
@@ -32,8 +31,7 @@ class ClientCompanyController extends Controller
         return redirect()->back();
     }
     
-    public function delete(Request $request, ClientCompany $client_company)
-    {
+    public function delete(Request $request, ClientCompany $client_company) {
         $client_company->delete();
         return redirect()->back();
     }

@@ -12,8 +12,7 @@ class DepartmentController extends Controller
         return view('department.new');
     }
     
-    public function create(Request $request)
-    {
+    public function create(Request $request) {
         $this->validate($request, Department::$rules);
         $department = new Department;
         $user = User::where('name', $request->user_name)->first();
@@ -23,21 +22,18 @@ class DepartmentController extends Controller
         return redirect()->back();
     }
     
-    public function index()
-    {
+    public function index() {
         return view('department.index', ['departments'=> Department::all() ]);
     }
     
-    public function edit(Request $request, Department $department)
-    {
+    public function edit(Request $request, Department $department) {
         if (empty($department)) {
-        abort(404);
+            abort(404);
         }
         return view('department.edit', compact('department'));
     }
     
-    public function update(Request $request)
-    {
+    public function update(Request $request) {
         $this->validate($request, Department::$project_rules);
       
         $department->fill($request->all());
@@ -45,10 +41,8 @@ class DepartmentController extends Controller
         return redirect()->back();
     }
     
-    public function delete(Request $request, Department $department)
-    {
+    public function delete(Request $request, Department $department) {
         $department->delete();
         return redirect()->back();
     }
-    
 }

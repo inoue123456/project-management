@@ -69,8 +69,7 @@ class UserController extends Controller
         return view('user.admin.index', compact('users', 'search_name'));
     }
     
-    public function showDetail(User $user)
-    {
+    public function showDetail(User $user) {
         return view('user.admin.detail', compact('user'));
     }
     
@@ -79,8 +78,7 @@ class UserController extends Controller
         return view('user.admin.edit', compact('user', 'departments'));
     }
     
-    public function update(Request $request, User $user)
-    {
+    public function update(Request $request, User $user) {
         $this->validate($request,User::$update_rules);
         $form = $request->all();
         $user->fill($form);
@@ -114,8 +112,7 @@ class UserController extends Controller
         return redirect()->back(); 
     }
     
-    public function delete(Request $request, User $user)
-    {
+    public function delete(Request $request, User $user) {
         $user->delete();
         return redirect()->back();
     }

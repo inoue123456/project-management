@@ -18,8 +18,8 @@ class ProjectController extends Controller
         $users_in_department = User::where('department_id', Auth::user()->department_id)->get();
         return view('project.new', compact('users_in_department'));
     }
-    public function create(Request $request)
-    {
+    
+    public function create(Request $request) {
         
         $validation = array_merge(Project::$project_rules, Client::$client_rules, ClientCompany::$client_company_rule);
         $this->validate($request, $validation);
@@ -51,28 +51,24 @@ class ProjectController extends Controller
         return redirect()->back();
     }
     
-   public function index(Request $request)
-    {
+   public function index(Request $request) {
         $search_project_name = $request->search_project_name;
         $seach_query = Project::query();
         if($search_project_name) {
             $seach_query->where('name', $search_project_name);
-            
         }
         $projects = $seach_query->get();
         return view('project.index', ['projects'=> $projects, 'search_project_name' => $search_project_name]);
     }
     
-    public function edit(Request $request, Project $project)
-    {
+    public function edit(Request $request, Project $project) {
         if (empty($project)) {
-        abort(404);
+            abort(404);
         }
         return view('project.edit', compact('project'));
     }
     
-    public function update(Request $request)
-    {
+    public function update(Request $request) {
         $this->validate($request, Project::$project_rules);
       
         $project = Project::find($request->id);
@@ -90,13 +86,11 @@ class ProjectController extends Controller
         return view('project.index', ['projects'=> Project::all(), 'search_project_name' => $search_project_name]);
     }
 
-    public function showDetail(Project $project)
-    {
+    public function showDetail(Project $project) {
         return view('project.detail', compact('project'));
     }
 
-    public function delete(Request $request, Project $project)
-    {
+    public function delete(Request $request, Project $project){
         $project->delete();
         return redirect()->back();
     }

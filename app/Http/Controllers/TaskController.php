@@ -27,7 +27,7 @@ class TaskController extends Controller
             return $form["project_id"] !== '---';
         }
         
-        if(!hasSelectedProject($form)){
+        if(!hasSelectedProject($form)) {
             \Session::flash('err_msg', 'プロジェクトを選択してください。');
         } else {
             $task->fill($form);
@@ -57,5 +57,4 @@ class TaskController extends Controller
         $client = Client::where('id', $project->client_id)->first();
         return view('task.show_progress', compact('project','client','tasks'));
     }
-    
 }
