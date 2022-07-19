@@ -38,6 +38,13 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        @auth
+                            @if (auth()->user()->role >= 5)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('project.create') }}">プロジェクト登録</a>
+                                </li>
+                            @endif
+                        @endauth
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('task.create') }}">タスク登録</a>
                         </li>
