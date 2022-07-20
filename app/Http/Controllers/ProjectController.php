@@ -58,7 +58,7 @@ class ProjectController extends Controller
             $seach_query->where('name', $search_project_name);
         }
         $projects = $seach_query->get();
-        return view('project.index', ['projects'=> $projects, 'search_project_name' => $search_project_name]);
+        return view('project.index', compact('projects', 'search_project_name'));
     }
     
     public function edit(Request $request, Project $project) {
@@ -87,7 +87,9 @@ class ProjectController extends Controller
     }
 
     public function showDetail(Project $project) {
-        return view('project.detail', compact('project'));
+        $tasks = Task::where('project_id', $project->id)->get();
+        $users = $project->users()->orderBy('name')->get();
+        return view('project.detail', compact('project', 'tasks', 'users'));
     }
 
     public function delete(Request $request, Project $project){

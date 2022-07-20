@@ -14,6 +14,10 @@ class Client extends Model
         'phone_number' => 'required');
         
     public function client_company() {
-        return $this->belongsTo('App\Clientcompany');
+        return $this->belongsTo('App\ClientCompany');
+    }
+    
+    public function projects() {
+        return $this->hasMany('App\Project');
     }
 }
