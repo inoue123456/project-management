@@ -84,8 +84,7 @@ class ProjectController extends Controller
             }
         }
         $project->users()->sync($user_ids);
-        $search_project_name = $request->search_project_name;
-        return view('project.index', ['projects'=> Project::all(), 'search_project_name' => $search_project_name]);
+        return redirect()->back();
     }
 
     public function showDetail(Project $project) {
