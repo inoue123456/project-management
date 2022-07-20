@@ -32,16 +32,23 @@
                         <input type="date" class="form-control" name="deadline_date" value="{{ $project->deadline_date }}">
                     </div>
                 </div>
+                <p>担当者</p>
                 <div class="form-group row">
-                    <label class="col-md-4">担当者</label>
                     <div class="col-md-10">
-                        <input type="select" class="form-control" name="user_name[]" value="{{ old('user_name') }}">
+                        <select class="form-control" name="user_name[]">
+                            <option value="---">---</option>
+                            @foreach($users_in_department as $user_in_department)
+                                <option value="{{ $user_in_department->id }}">{{ $user_in_department->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    <div class="col-md-10">
-                        <input type="select" class="form-control" name="user_name[]" value="{{ old('user_name') }}">
-                    </div>
-                    <div class="col-md-10">
-                        <input type="select" class="form-control" name="user_name[]" value="{{ old('user_name') }}">
+                    <div class="mt-2 col-md-10">
+                        <select class="form-control" name="user_name[]">
+                            <option value="---">---</option>
+                            @foreach($users_in_department as $user_in_department)
+                                <option value="{{ $user_in_department->id }}">{{ $user_in_department->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 {{ csrf_field() }}

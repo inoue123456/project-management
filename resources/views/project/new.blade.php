@@ -59,7 +59,6 @@
                 </div>
                 <br>
                 <big><p>担当者</p></big>
-                
                 <div class="form-group row">
                     <div class="col-md-10">
                         <select class="form-control" name="user_name[]">
@@ -78,7 +77,6 @@
                         </select>
                     </div>
                 </div>
-                
                 {{ csrf_field() }}
                 <input type="submit" class="btn btn-primary" value="登録">
             </form>

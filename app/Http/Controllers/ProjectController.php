@@ -65,7 +65,9 @@ class ProjectController extends Controller
         if (empty($project)) {
             abort(404);
         }
-        return view('project.edit', compact('project'));
+        
+        $users_in_department = User::where('department_id', Auth::user()->department_id)->get();
+        return view('project.edit', compact('project', 'users_in_department'));
     }
     
     public function update(Request $request) {
