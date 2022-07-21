@@ -38,7 +38,7 @@
                 <div class="form-group row">
                     <label class="col-md-3">進行状況</label>
                         <div class="col-md-10">
-                            <input type="number" class="form-control" name="progress" min="0" max="100">
+                            <input type="number" class="form-control" name="progress" min="0" max="100" value="0">
                         </div>
                 </div>
                 <div class="form-group row">
