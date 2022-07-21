@@ -9,6 +9,10 @@ class PersonalTask extends Model
     protected $table = 'personal_tasks';
     protected $fillable = ['task_id', 'personaltask_name','progress', 'deadline_date'];
     
+    protected $attributes = [
+        'progress' => 0,
+    ];
+    
     public static $rules = array(
         'task_id' => 'required',
         'personaltask_name' => 'required',
