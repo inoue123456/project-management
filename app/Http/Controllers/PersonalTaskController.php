@@ -54,6 +54,7 @@ class PersonalTaskController extends Controller
     
     public function showProgress() {
         $personal_tasks = Auth::user()->personal_tasks()->orderBy('personaltask_name')->get();
-        return view('personaltask.show_progress', compact('personal_tasks'));
+        //return view('personaltask.show_progress', compact('personal_tasks'));
+        return view('personaltask.gantt', compact('personal_tasks'));
     }
 }

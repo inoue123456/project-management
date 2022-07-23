@@ -39,3 +39,7 @@
     </div>    
 </div>
 @endsection
+
+@section('script')
+    <script src="{{ asset('js/show_progress.js') }}"></script>
+@endsection
