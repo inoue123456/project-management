@@ -16,5 +16,5 @@
         window.Laravel = {};
         window.Laravel.personalTasks = {!! $personal_tasks->toJson() !!};
     </script>
-    <script src="{{ asset('js/gantt.js') }}" defer></script>
+    <script src="{{ asset('js/personal_tasks_gantt.js') }}" defer></script>
 @endsection

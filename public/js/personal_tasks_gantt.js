@@ -84,17 +84,56 @@
 /******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */,
-/* 1 */
-/*!*************************************!*\
-  !*** multi ./resources/js/gantt.js ***!
-  \*************************************/
+/******/ ({
+
+/***/ "./resources/js/personal_tasks_gantt.js":
+/*!**********************************************!*\
+  !*** ./resources/js/personal_tasks_gantt.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var personalTasks = [];
+
+for (var i = 0; i < Laravel.personalTasks.length; i++) {
+  personalTasks.unshift({
+    id: 'id1',
+    name: Laravel.personalTasks[i].personaltask_name,
+    description: '必ずやる!!',
+    start: Laravel.personalTasks[i].created_at,
+    end: Laravel.personalTasks[i].deadline_date,
+    progress: Laravel.personalTasks[i].progress
+  });
+} // gantt をセットアップ
+
+
+var gantt = new Gantt("#gantt", personalTasks, {
+  // ダブルクリック時
+  on_click: function on_click(personalTask) {
+    window.alert(personalTask.description);
+  },
+  // 日付変更時
+  on_date_change: function on_date_change(personalTask, start, end) {
+    console.log("".concat(personalTask.name, ": change date"));
+  },
+  // 進捗変更時
+  on_progress_change: function on_progress_change(personalTask, progress) {
+    console.log("".concat(personalTask.name, ": change progress to ").concat(progress, "%"));
+  }
+});
+
+/***/ }),
+
+/***/ 1:
+/*!****************************************************!*\
+  !*** multi ./resources/js/personal_tasks_gantt.js ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-!(function webpackMissingModule() { var e = new Error("Cannot find module '/home/ec2-user/environment/project_management/resources/js/gantt.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+module.exports = __webpack_require__(/*! /home/ec2-user/environment/project_management/resources/js/personal_tasks_gantt.js */"./resources/js/personal_tasks_gantt.js");
 
 
 /***/ })
-/******/ ]);
+
+/******/ });

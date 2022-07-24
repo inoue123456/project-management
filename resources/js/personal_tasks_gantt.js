@@ -1,6 +1,6 @@
-var tasks = [];
+var personalTasks = [];
 for (let i = 0; i < Laravel.personalTasks.length; i++) {
-    tasks.unshift({
+    personalTasks.unshift({
         id: 'id1',
         name: Laravel.personalTasks[i].personaltask_name,
         description: '必ずやる!!',
@@ -10,17 +10,17 @@ for (let i = 0; i < Laravel.personalTasks.length; i++) {
     });
 }
 // gantt をセットアップ
-var gantt = new Gantt("#gantt", tasks, {
+var gantt = new Gantt("#gantt", personalTasks, {
     // ダブルクリック時
-    on_click: (task) => {
-        window.alert(task.description);
+    on_click: (personalTask) => {
+        window.alert(personalTask.description);
     },
     // 日付変更時
-    on_date_change: (task, start, end) => {
-        console.log(`${task.name}: change date`);
+    on_date_change: (personalTask, start, end) => {
+        console.log(`${personalTask.name}: change date`);
     },
     // 進捗変更時
-    on_progress_change: (task, progress) => {
-        console.log(`${task.name}: change progress to ${progress}%`);
+    on_progress_change: (personalTask, progress) => {
+        console.log(`${personalTask.name}: change progress to ${progress}%`);
     },
 });
