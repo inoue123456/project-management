@@ -12,7 +12,6 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/frappe-gantt/0.5.0/frappe-gantt.min.js"></script>
-        <script src="{{ asset('js/gantt.js') }}" defer></script>
     
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">

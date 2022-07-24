@@ -93,34 +93,72 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var tasks = [{
-  id: 'id1',
-  name: '確定申告する',
-  description: '必ずやる!!',
-  start: '2021-01-01',
-  end: '2021-01-7',
-  progress: 100
-}, {
-  id: 'id2',
-  name: 'クライアントに挨拶',
-  description: '年賀状も確認した上で連絡する',
-  start: '2021-01-4',
-  end: '2021-01-8',
-  progress: 100
-}, {
-  id: 'id3',
-  name: '請求書作成',
-  description: 'みんなに稼働時間を記録してもらった上で請求を出す',
-  start: '2021-01-5',
-  end: '2021-01-6',
-  progress: 80
-}];
-console.log(Laravel.personalTasks); // gantt をセットアップ
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
-var gantt = new Gantt("#gantt", Laravel.personalTasks, {
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var tasks = [];
+
+for (var i = 0; i < Laravel.personalTasks.length; i++) {
+  tasks.unshift({
+    id: 'id1',
+    name: Laravel.personalTasks[i].personaltask_name,
+    description: '必ずやる!!',
+    start: Laravel.personalTasks[i].created_at,
+    end: Laravel.personalTasks[i].deadline_date,
+    progress: Laravel.personalTasks[i].progress
+  });
+}
+/*{
+    id: 'id1',
+    name: Laravel.personalTasks[0].personaltask_name,
+    description: '必ずやる!!',
+    start: Laravel.personalTasks[0].created_at,
+    end: Laravel.personalTasks[0].deadline_date,
+    progress: Laravel.personalTasks[0].progress,
+},
+{
+    id: 'id2',
+    name: 'クライアントに挨拶',
+    description: '年賀状も確認した上で連絡する',
+    start: '2021-01-4',
+    end: '2021-01-8',
+    progress: 100,
+},
+{
+    id: 'id3',
+    name: '請求書作成',
+    description: 'みんなに稼働時間を記録してもらった上で請求を出す',
+    start: '2021-01-5',
+    end: '2021-01-6',
+    progress: 80,
+}
+];
+//*/
+
+
+var _iterator = _createForOfIteratorHelper(Laravel.personalTasks),
+    _step;
+
+try {
+  for (_iterator.s(); !(_step = _iterator.n()).done;) {
+    var personalTasks = _step.value;
+    console.log(personalTasks);
+  }
+} catch (err) {
+  _iterator.e(err);
+} finally {
+  _iterator.f();
+}
+
+console.log(tasks); // gantt をセットアップ
+
+var gantt = new Gantt("#gantt", tasks, {
   // ダブルクリック時
   on_click: function on_click(task) {
-    console.log(task.description);
+    window.alert(task.description);
   },
   // 日付変更時
   on_date_change: function on_date_change(task, start, end) {
