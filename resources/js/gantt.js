@@ -1,12 +1,12 @@
 var tasks = [];
 for (let i = 0; i < Laravel.personalTasks.length; i++) {
     tasks.unshift({
-            id: 'id1',
-            name: Laravel.personalTasks[i].personaltask_name,
-            description: '必ずやる!!',
-            start: Laravel.personalTasks[i].created_at,
-            end: Laravel.personalTasks[i].deadline_date,
-            progress: Laravel.personalTasks[i].progress,
+        id: 'id1',
+        name: Laravel.personalTasks[i].personaltask_name,
+        description: '必ずやる!!',
+        start: Laravel.personalTasks[i].created_at,
+        end: Laravel.personalTasks[i].deadline_date,
+        progress: Laravel.personalTasks[i].progress,
     });
 }
 // gantt をセットアップ
