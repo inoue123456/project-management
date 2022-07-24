@@ -22,8 +22,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
     Route::get('user/{user}/edit', 'Admin\UserController@edit')->name('user.edit');
     Route::post('user/{user}/edit', 'Admin\UserController@update')->name('user.update');
     Route::get('user/{user}/delete', 'Admin\UserController@delete')->name('user.delete');
-    Route::get('notification/new', 'Admin\NotificationController@add');
-    Route::post('notification/new', 'Admin\NotificationController@create');
 });
 
 Route::group(['middleware' => 'auth'], function() {
