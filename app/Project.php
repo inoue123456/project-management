@@ -22,6 +22,10 @@ class Project extends Model
         'deadline_date' => 'required|after:contract_date',
     );
     
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+    
     public function users() {
         return $this->belongsToMany('App\User');
     }
