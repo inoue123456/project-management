@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/js/personal_tasks_gantt.js": "/js/personal_tasks_gantt.js"
+    "/js/personal_tasks_gantt.js": "/js/personal_tasks_gantt.js",
+    "/js/tasks_gantt.js": "/js/tasks_gantt.js"
 }

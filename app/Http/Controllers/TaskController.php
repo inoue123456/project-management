@@ -54,7 +54,8 @@ class TaskController extends Controller
     
     public function showProgress(Project $project) {
         $tasks = Task::where('project_id', $project->id)->get();
-        $client = Client::where('id', $project->client_id)->first();
-        return view('task.show_progress', compact('project','client','tasks'));
+        //$client = Client::where('id', $project->client_id)->first();
+        //return view('task.show_progress', compact('project','client','tasks'));
+        return view('task.gantt', compact('tasks'));
     }
 }
