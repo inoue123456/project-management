@@ -7,7 +7,12 @@
         　　<h2>タスク進行状況</h2>
             <svg id="gantt"></svg>
         </div>
-    </div>    
+    </div>
+    <div class="mx-auto mt-3 btn-group" role="group">
+	    <button type="button" class="btn btn-sm btn-light">Day</button>
+	    <button type="button" class="btn btn-sm btn-light active">Week</button>
+	    <button type="button" class="btn btn-sm btn-light">Month</button>
+	</div>
 </div>
 @endsection
 

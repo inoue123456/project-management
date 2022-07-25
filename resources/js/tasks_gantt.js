@@ -24,3 +24,12 @@ var gantt = new Gantt("#gantt", tasks, {
         console.log(`${task.name}: change progress to ${progress}%`);
     },
 });
+$(function() {
+    $(".btn-group").on("click", "button", function() {
+        $btn = $(this);
+        var mode = $btn.text();
+        gantt.change_view_mode(mode);
+        $btn.parent().find('button').removeClass('active');
+        $btn.addClass('active');
+    });
+});
