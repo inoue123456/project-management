@@ -97,20 +97,21 @@ var tasks = [];
 
 for (var i = 0; i < Laravel.tasks.length; i++) {
   tasks.unshift({
-    id: 'id1',
+    id: '1',
     name: Laravel.tasks[i].task_name,
     description: '必ずやる!!',
     start: Laravel.tasks[i].created_at,
     end: Laravel.tasks[i].deadline_date,
     progress: Laravel.tasks[i].progress
   });
-} // gantt をセットアップ
+}
 
+console.log(Laravel.tasks); // gantt をセットアップ
 
 var gantt = new Gantt("#gantt", tasks, {
   // ダブルクリック時
   on_click: function on_click(task) {
-    window.alert(task.description);
+    window.alert(task.id);
   },
   // 日付変更時
   on_date_change: function on_date_change(task, start, end) {
@@ -120,6 +121,15 @@ var gantt = new Gantt("#gantt", tasks, {
   on_progress_change: function on_progress_change(task, progress) {
     console.log("".concat(task.name, ": change progress to ").concat(progress, "%"));
   }
+});
+$(function () {
+  $(".btn-group").on("click", "button", function () {
+    $btn = $(this);
+    var mode = $btn.text();
+    gantt.change_view_mode(mode);
+    $btn.parent().find('button').removeClass('active');
+    $btn.addClass('active');
+  });
 });
 
 /***/ }),
