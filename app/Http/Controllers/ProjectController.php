@@ -45,7 +45,7 @@ class ProjectController extends Controller
         $project->client_id = Client::where('email', $client_form ['email'])->first()->id;
         $project->save();
         
-        $user_ids = $request->get('user_name', []);
+        $user_ids = $request->user_ids;
         
         $project->users()->sync($user_ids);
         return redirect()->back();
