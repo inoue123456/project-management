@@ -46,7 +46,6 @@ class ProjectController extends Controller
         $project->save();
         
         $user_ids = $request->user_ids;
-        
         $project->users()->sync($user_ids);
         return redirect()->back();
     }
@@ -66,7 +65,7 @@ class ProjectController extends Controller
             abort(404);
         }
         
-        $users_in_department = User::where('department_id', Auth::user()->department_id)->get();
+        $users_in_department = Auth::user()->department->users;
         return view('project.edit', compact('project', 'users_in_department'));
     }
     
@@ -77,12 +76,7 @@ class ProjectController extends Controller
         $project_form = $request->all();
         $project->fill($project_form)->save();
         
-        $user_names = $request->get('user_name', []);
-        foreach($user_names as $user_name) {
-            if($user_name) {
-                $user_ids[] = User::where('name', $user_name)->first()->id;
-            }
-        }
+        $user_ids = $request->user_ids;
         $project->users()->sync($user_ids);
         return redirect()->back();
     }

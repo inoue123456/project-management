@@ -60,7 +60,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\PersonalTask');
     }
     
-    public function departments() {
+    public function department() {
         return $this->belongsTo('App\Department');
     }
     
