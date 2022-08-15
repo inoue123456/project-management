@@ -46,7 +46,17 @@ class ProjectController extends Controller
         $project->save();
         
         $user_ids = $request->user_ids;
-        $project->users()->sync($user_ids);
+        if($user_ids === ['---','---']) {
+            \Session::flash('err_msg', '担当者を選択してください。');
+        }else {
+            foreach($user_ids as $user_id) {
+                if(is_numeric($user_id)) {
+                    $project->users()->sync($user_id);
+                    $user = User::find($user_id);
+                    $user->notify(new ProjectRegister($project));
+                }
+            }
+        }
         return redirect()->back();
     }
     
