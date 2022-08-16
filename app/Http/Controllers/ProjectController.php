@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Project;
 use Carbon\Carbon;
+use App\Mail\ProjectAssign;
+use Illuminate\Support\Facades\Mail;
 use Auth;
 use App\ClientCompany;
 use App\Client;
@@ -53,10 +55,11 @@ class ProjectController extends Controller
                 if(is_numeric($user_id)) {
                     $project->users()->sync($user_id);
                     $user = User::find($user_id);
-                    $user->notify(new ProjectRegister($project));
+                    Mail::to($user)->send(new ProjectAssign($project));
                 }
             }
         }
+        
         return redirect()->back();
     }
     
