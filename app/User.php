@@ -37,13 +37,13 @@ class User extends Authenticatable
     
     public static $rules = array(
         'name' => 'required', 
-        'email' => 'required', 
+        'email' => ['required', 'unique:users'],
         'department_id' => 'required', 
         'role'=> 'required');
     
     public static $update_rules = [
         'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255'],
+        'email' => ['required', 'string', 'email', 'unique:users'],
     ];
     
     public static $password_change_rules = [

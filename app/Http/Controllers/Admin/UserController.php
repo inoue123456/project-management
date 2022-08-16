@@ -9,6 +9,7 @@ use App\Department;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 
 class UserController extends Controller
@@ -27,7 +28,6 @@ class UserController extends Controller
         $user->fill($form);
         $pass = config('app.pass_key');
         $user->password = Hash::make($pass);
-        
         
         function hasSelectedRole($form){
            return $form['role'] !== '---';
@@ -79,7 +79,15 @@ class UserController extends Controller
     }
     
     public function update(Request $request, User $user) {
-        $this->validate($request,User::$update_rules);
+        //バリデーションルールはmodelに書きたい。改善必須
+        $this->validate($request, [
+            'name' => ['required', 'string'],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($user->id),
+            ],
+        ]);
         $form = $request->all();
         $user->fill($form);
         

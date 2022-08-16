@@ -18,6 +18,10 @@
           <ul><a href={{ route('task.showProgress', $project)}}>{{ $project->name }}</a></ul>
         @endforeach
         @auth
+          @if (auth()->user()->role == 10)
+            <h5><a href="{{ route('user.new') }}">社員登録</a></h5>
+            <h5><a href="{{ route('user.index') }}">社員一覧</a></h5>
+          @endif
           @if (auth()->user()->role >= 5)
             <h5><a href="{{ route('project.index') }}">プロジェクト一覧</a></h5>
           @endif

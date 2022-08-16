@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
-    Route::get('user/new', 'Admin\UserController@add');
+    Route::get('user/new', 'Admin\UserController@add')->name('user.new');
     Route::post('user/new', 'Admin\UserController@create')->name('user.create');
     Route::get('/', 'Admin\UserController@index')->name('user.index');
     Route::get('user/{user}', 'Admin\UserController@showDetail')->name('user.showDetail');
@@ -57,6 +57,7 @@ Route::group(['middleware' => 'manager'], function() {
         Route::post('/', 'ProjectController@update')->name('project.update');
         Route::get('{project}', 'ProjectController@showDetail')->name('project.showDetail');
         Route::get('{project}/delete', 'ProjectController@delete')->name('project.delete');
+        
     });
     Route::group(['prefix' => 'clientcompanies'], function() {
         Route::get('/', 'ClientCompanyController@index')->name('client_company.index');
