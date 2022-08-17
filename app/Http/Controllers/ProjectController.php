@@ -22,7 +22,6 @@ class ProjectController extends Controller
     }
     
     public function create(Request $request) {
-        
         $validation = array_merge(Project::$project_rules, Client::$client_rules, ClientCompany::$client_company_rule);
         $this->validate($request, $validation);
         
@@ -48,18 +47,18 @@ class ProjectController extends Controller
         $project->save();
         
         $user_ids = $request->user_ids;
-        if($user_ids === ['---','---']) {
+        $user_ids_filter = array_filter($user_ids);
+        if(empty($user_ids_filter)) {
             \Session::flash('err_msg', '担当者を選択してください。');
         }else {
+            //$users = User::findMany($user_ids);ユーザー一気に取得するべき
             foreach($user_ids as $user_id) {
                 if(is_numeric($user_id)) {
                     $project->users()->sync($user_id);
-                    $user = User::find($user_id);
-                    Mail::to($user)->send(new ProjectAssign($project));
+                    Mail::to(User::find($user_id))->send(new ProjectAssign($project));
                 }
             }
         }
-        
         return redirect()->back();
     }
     
@@ -86,11 +85,21 @@ class ProjectController extends Controller
         $this->validate($request, Project::$project_rules);
       
         $project = Project::find($request->id);
-        $project_form = $request->all();
-        $project->fill($project_form)->save();
+        $project->fill($request->only(['name','contract_date', 'deadline_date']))->save();
         
         $user_ids = $request->user_ids;
-        $project->users()->sync($user_ids);
+        $user_ids_filter = array_filter($user_ids);
+        if(empty($user_ids_filter)) {
+            \Session::flash('err_msg', '担当者を選択してください。');
+        }else {
+            foreach($user_ids as $user_id) {
+                if(is_numeric($user_id)) {
+                    $project->users()->sync($user_id);
+                    $user = User::find($user_id);
+                    Mail::to($user)->send(new ProjectAssign($project));
+                }
+            }
+        }
         return redirect()->back();
     }
 

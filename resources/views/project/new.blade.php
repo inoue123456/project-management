@@ -62,7 +62,7 @@
                 <div class="form-group row">
                     <div class="col-md-10">
                         <select class="form-control" name="user_ids[]">
-                            <option value="---">---</option>
+                            <option value="">---</option>
                             @foreach($users_in_department as $user_in_department)
                                 <option value="{{ $user_in_department->id }}">{{ $user_in_department->name }}</option>
                             @endforeach
@@ -70,7 +70,7 @@
                     </div>
                     <div class="mt-2 col-md-10">
                         <select class="form-control" name="user_ids[]">
-                            <option value="---">---</option>
+                            <option value="">---</option>
                             @foreach($users_in_department as $user_in_department)
                                 <option value="{{ $user_in_department->id }}">{{ $user_in_department->name }}</option>
                             @endforeach
