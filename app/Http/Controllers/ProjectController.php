@@ -13,6 +13,7 @@ use App\ClientCompany;
 use App\Client;
 use App\Task;
 use App\User;
+use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
 {
@@ -56,6 +57,9 @@ class ProjectController extends Controller
                 if(is_numeric($user_id)) {
                     $project->users()->sync($user_id);
                     Mail::to(User::find($user_id))->send(new ProjectAssign($project));
+                    if (count(Mail::failures()) > 0) {
+                        Log::error(Mail::failures());
+                    };
                 }
             }
         }
@@ -97,6 +101,9 @@ class ProjectController extends Controller
                     $project->users()->sync($user_id);
                     $user = User::find($user_id);
                     Mail::to($user)->send(new ProjectAssign($project));
+                    if (count(Mail::failures()) > 0) {
+                        Log::error(Mail::failures());
+                    };
                 }
             }
         }

@@ -71,9 +71,4 @@ class User extends Authenticatable
     public function isManager(){
         return $this->role >= 5;
     }
-    
-    /*public function isEmployee(){
-        return $this->role == 0;
-    }
-    //*/
 }
